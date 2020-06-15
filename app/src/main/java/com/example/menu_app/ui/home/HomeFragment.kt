@@ -19,29 +19,30 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.menu_app.Classes.Movement
-import com.example.menu_app.DashboardActivity
+
 import com.example.menu_app.R
 import com.example.menu_app.database.DBHandler
-import kotlinx.android.synthetic.main.activity_dashboard_.*
+import kotlinx.android.synthetic.main.fragment_home.*
+
 import kotlinx.android.synthetic.main.fragment_home.view.*
+import kotlinx.android.synthetic.main.fragment_home.view.rv_dashboard
 
 
+
+@Suppress("ImplicitThis")
 class HomeFragment : Fragment() {
-
     lateinit var dbHandler: DBHandler
 
-
+    //Ya funca
     override fun onCreateView(
+
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
 
-
-
-       val  root = inflater.inflate(R.layout.fragment_home, container, false)
-
-        var dbHandler = DBHandler(root.context)
+        val  root = inflater.inflate(R.layout.fragment_home, container, false)
+        dbHandler = DBHandler(root.context)
 
 
         root.rv_dashboard.layoutManager = LinearLayoutManager(requireActivity())
@@ -117,20 +118,22 @@ class HomeFragment : Fragment() {
     }
 
     private fun refreshList() {
-        rv_dashboard.adapter = DashboardAdapter(HomeFragment(), dbHandler.getMovements())
+        rv_dashboard.adapter = DashboardAdapter(this, dbHandler.getMovements())
     }
 
 
-    class DashboardAdapter(val activity: HomeFragment, val list: MutableList<Movement>) :
+
+    class DashboardAdapter(val fragment: HomeFragment, val list: MutableList<Movement>) :
         RecyclerView.Adapter<DashboardAdapter.ViewHolder>() {
         override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
             return ViewHolder(
-                LayoutInflater.from(activity.context).inflate(
+                LayoutInflater.from(fragment!!.context).inflate(
                     R.layout.rv_child_dashboard,
                     p0,
                     false
                 )
             )
+
         }
 
         override fun getItemCount(): Int {
@@ -148,23 +151,23 @@ class HomeFragment : Fragment() {
 
 
             holder.menu.setOnClickListener {
-                val popup = PopupMenu(activity.context, holder.menu)
+                val popup = PopupMenu(fragment!!.context, holder.menu)
                 popup.inflate(R.menu.dashboard_child)
                 popup.setOnMenuItemClickListener {
 
                     when (it.itemId) {
                         R.id.menu_edit -> {
-                            activity.updateMovement(list[p1])
+                            fragment.updateMovement(list[p1])
                         }
 
 
                         R.id.menu_delete -> {
-                            val dialog = AlertDialog.Builder(activity.requireContext())
+                            val dialog = AlertDialog.Builder(fragment.requireContext())
                             dialog.setTitle("Are you sure")
                             dialog.setMessage("Do you want to delete this movement ?")
                             dialog.setPositiveButton("Continue") { _: DialogInterface, _: Int ->
-                                activity.dbHandler.deleteMovement(list[p1].id)
-                                activity.refreshList()
+                                fragment.dbHandler.deleteMovement(list[p1].id)
+                                fragment.refreshList()
                             }
                             dialog.setNegativeButton("Cancel") { _: DialogInterface, _: Int ->
 
