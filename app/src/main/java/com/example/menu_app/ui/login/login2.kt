@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.example.menu_app.DashboardActivity
 import com.example.menu_app.MainActivity
 import com.example.menu_app.R
 import kotlinx.android.synthetic.main.activity_login2.*
