@@ -5,6 +5,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.example.menu_app.Classes.Movement
+import com.example.menu_app.Classes.User
 
 
 class DBHandler(val context: Context) : SQLiteOpenHelper(context, DB_NAME, null, DB_VERSION) {
@@ -13,10 +14,17 @@ class DBHandler(val context: Context) : SQLiteOpenHelper(context, DB_NAME, null,
                 "$COL_ID integer PRIMARY KEY AUTOINCREMENT," +
                 "$COL_CREATED_AT datetime DEFAULT CURRENT_TIMESTAMP," +
                 //"$COL_USER_NAME varchar," +
+                //"$COL_PASS varchar"+
                 "$COL_DATE varchar," +
                 "$COL_NAME varchar);"
 
+        val createUserMoneyApp = "CREATE TABLE $USER_TABLE ( " +
+                "$COL_ID_USER integer PRIMARY KEY AUTOINCREMENT," +
+                "$COL_USER_NAME varchar," +
+                "$COL_PASS varchar);"+
+
         db.execSQL(createMoneyAppTable)
+        db.execSQL(createUserMoneyApp)
 
 
     }
@@ -32,6 +40,45 @@ class DBHandler(val context: Context) : SQLiteOpenHelper(context, DB_NAME, null,
         cv.put(COL_DATE, movement.date)
         val result = db.insert(TABLE_MONEYAPP, null, cv)
         return result != (-1).toLong()
+    }
+    fun addUser(user: User):Boolean{
+        val db = writableDatabase
+        val cv = ContentValues()
+        cv.put(COL_USER_NAME, user.username)
+        cv.put(COL_PASS, user.pass)
+        val result =db.insert(USER_TABLE, null, cv)
+return result != (-1).toLong()
+    }
+    fun getUser(user: String, pass: String ): Boolean {
+
+        // array of columns
+        val columns = arrayOf(COL_ID_USER)
+
+        val db = this.readableDatabase
+
+        // selection criteria
+        val selection = "$COL_USER_NAME = ? AND $COL_PASS = ?"
+
+        // selection arguments
+        val selectionArgs = arrayOf(user, pass)
+
+        val cursor = db.query(
+            USER_TABLE, //Table to query
+            columns, //columns to return
+            selection, //columns for the WHERE clause
+            selectionArgs, //The values for the WHERE clause
+            null,  //group the rows
+            null, //filter by row groups
+            null) //The sort order
+
+        val cursorCount = cursor.count
+        cursor.close()
+        db.close()
+
+        if (cursorCount > 0)
+            return true
+
+        return false
     }
 
     fun updateMovement(movement: Movement) {
