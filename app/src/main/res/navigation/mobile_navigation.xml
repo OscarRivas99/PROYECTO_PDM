@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/nav_categoria"
-        android:name="com.example.menu_app.ui.gallery.CategoriFragment"
+        android:name="com.example.menu_app.ui.category.CategoriFragment"
         android:label="@string/menu_categoria"
         tools:layout="@layout/fragment_categoria" >
         <action

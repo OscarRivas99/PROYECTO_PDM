@@ -25,10 +25,11 @@ class animation : AppCompatActivity() {
             ic_logo.startAnimation(AnimationUtils.loadAnimation(this,R.anim.splash_out))
             Handler().postDelayed({
                 ic_logo.visibility = View.GONE
-
-                
+                if (dbHandler.val_user()){
                     startActivity(Intent(this, login2::class.java))
-                finish()
+               }else {
+                    startActivity(Intent(this, registro::class.java))
+                }
             },500)
         },1500)
     }
