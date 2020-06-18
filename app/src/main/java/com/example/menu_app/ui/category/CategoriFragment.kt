@@ -1,4 +1,4 @@
-package com.example.menu_app.ui.gallery
+package com.example.menu_app.ui.category
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,7 +12,6 @@ import androidx.navigation.fragment.findNavController
 
 import com.example.menu_app.R
 import com.example.menu_app.databinding.FragmentCategoriaBinding
-import com.example.menu_app.databinding.FragmentMetodosBinding
 
 
 class CategoriFragment : Fragment() {

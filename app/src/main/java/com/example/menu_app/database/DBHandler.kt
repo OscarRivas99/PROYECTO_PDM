@@ -2,6 +2,7 @@ package com.example.menu_app.database
 
 import android.content.ContentValues
 import android.content.Context
+import android.database.DatabaseUtils
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.example.menu_app.Classes.Movement
@@ -49,6 +50,34 @@ class DBHandler(val context: Context) : SQLiteOpenHelper(context, DB_NAME, null,
         val result =db.insert(USER_TABLE, null, cv)
 return result != (-1).toLong()
     }
+
+fun val_user():Boolean{
+    var count = 0
+    val db = this.readableDatabase
+
+    val cursor = db.rawQuery("SELECT count(*) FROM $USER_TABLE", null)
+
+    try {
+        if(cursor != null)
+            if(cursor.count > 0){
+                cursor.moveToFirst();
+                count = cursor.getInt(0);
+            }
+    }finally {
+        if (cursor != null && !cursor.isClosed) {
+            cursor.close();
+        }
+    }
+    if (count > 0)
+        return true
+
+    return false
+}
+
+
+
+
+
     fun getUser(user: String, pass: String ): Boolean {
 
         // array of columns

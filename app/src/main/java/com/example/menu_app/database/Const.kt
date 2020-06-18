@@ -2,7 +2,7 @@ package com.example.menu_app.database
 
 import android.os.FileObserver.CREATE
 
-const val DB_NAME = "BillMoney1.1"
+const val DB_NAME = "BillMoney1.9"
 const val DB_VERSION = 1
 const val TABLE_MONEYAPP = "MoneyApp"
 const val COL_ID_USER ="id"

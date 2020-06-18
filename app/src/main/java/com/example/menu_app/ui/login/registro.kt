@@ -39,10 +39,6 @@ class registro : AppCompatActivity() {
 
             }
         }
-        button_4.setOnClickListener {
-            val intent = Intent(this, login2::class.java)
-            startActivity(intent)
 
-        }
     }
 }
