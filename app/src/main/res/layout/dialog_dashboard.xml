@@ -1,4 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        tools:context=".ui.slideshow.MetodosFragment">
+
+        <TextView
+            android:id="@+id/label_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/big_wide"
+            android:text="Ingresar datos de movimiento"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/et_mount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:gravity="center_horizontal"
+        android:hint="Ingresar monto (en $)"
+        android:inputType="numberDecimal"
+        android:textAlignment="center"
+        android:textColor="@color/cardview_dark_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/label_money" />
+
+
+        <Button
+            android:id="@+id/show_datepicker_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/big_wide"
+            android:layout_marginLeft="@dimen/big_wide"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:background="@drawable/bg_pink"
+            android:shadowColor="#FFFFFF"
+            android:text="Seleccionar fecha"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_mount" />
+
+        <TextView
+            android:id="@+id/fecha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            android:text="@string/date"
+            android:textSize="20sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/show_datepicker_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/show_datepicker_button" />
+
+    <EditText
+        android:id="@+id/notes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:gravity="center_horizontal"
+        android:hint="Añadir descripción"
+        android:inputType="textMultiLine"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/show_datepicker_button" />
+
+
+    <Button
+        android:id="@+id/send_mount_button"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/bg_aqua"
+        android:text="Mostrar Datos"
+        android:textAllCaps="false"
+        android:textColor="#058D8D"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/label_categories" />
+
+    <Button
+        android:id="@+id/button_categoria"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/bg_aqua"
+        android:text="Elige una categoria"
+        android:textAllCaps="false"
+        android:textColor="#058D8D"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/send_mount_button"
+        app:layout_constraintTop_toBottomOf="@+id/tv_show_categorie" />
+
+        <TextView
+            android:id="@+id/label_categories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="32dp"
+            android:text="Categoria: "
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/notes" />
+
+
+    <TextView
+        android:id="@+id/tv_show_categorie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="categoria"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/notes" />
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--
 <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -8,28 +158,57 @@
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ingrese movimiento"/>
+            android:text="ingrese categoria"/>
 
     <EditText
-            android:id="@+id/ev_todo"
+            android:id="@+id/et_categoria"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
     <TextView
 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="64dp"
-            android:text="ingrese usuario"/>
-
-    <EditText
-            android:id="@+id/et_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/ev_todo"
+            android:paddingTop="64dp"
+            android:text="ingrese monto"/>
+
+    <EditText
+            android:id="@+id/et_monto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/et_categoria"
             android:paddingTop="60dp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_monto"
+
+        android:text="ingrese fecha"/>
+
+    <EditText
+        android:id="@+id/et_fecha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_monto"
+        />
+
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_fecha"
+
+        android:text="ingrese descripcion"/>
+
+    <EditText
+        android:id="@+id/et_descripcion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/et_fecha"
+        android:layout_marginTop="20dp" />
 
 
 
 
-</RelativeLayout>
+
+</RelativeLayout>-->

@@ -7,7 +7,7 @@
 
 
     <TextView
-        android:id="@+id/tv_todo_name"
+        android:id="@+id/tv_categoria"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -19,7 +19,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/tv_user"
+        android:id="@+id/tv_monto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -33,6 +33,39 @@
         android:text="dsfgg"
         android:textStyle="bold"
         />
+    <TextView
+        android:id="@+id/tv_fecha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="8dp"
+        android:layout_toStartOf="@+id/iv_menu"
+        android:layout_toLeftOf="@id/iv_menu"
+        android:background="#D3EC440F"
+        android:padding="16dp"
+        android:paddingLeft="16dp"
+        android:paddingTop="30dp"
+        android:text="dsfgg"
+        android:textStyle="bold"
+        />
+
+
+    <TextView
+        android:id="@+id/tv_descripcion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:layout_marginBottom="8dp"
+        android:layout_toStartOf="@+id/iv_menu"
+        android:layout_toLeftOf="@id/iv_menu"
+        android:background="#D3EC440F"
+        android:padding="16dp"
+        android:paddingLeft="16dp"
+        android:paddingTop="30dp"
+        android:text="dsfgg"
+        android:textStyle="bold"
+        />
+
 
 
     <ImageView

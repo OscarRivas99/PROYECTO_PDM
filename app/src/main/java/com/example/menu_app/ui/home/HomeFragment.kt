@@ -1,5 +1,6 @@
 package com.example.menu_app.ui.home
 
+import android.app.DatePickerDialog
 import android.app.PendingIntent.getActivity
 import android.content.DialogInterface
 import android.os.Bundle
@@ -22,18 +23,25 @@ import com.example.menu_app.Classes.Movement
 
 import com.example.menu_app.R
 import com.example.menu_app.database.DBHandler
+import com.example.menu_app.databinding.FragmentCategoriaBinding
+import com.example.menu_app.databinding.FragmentHomeBinding
+import com.example.menu_app.ui.slideshow.MetodosFragmentDirections
+import kotlinx.android.synthetic.main.dialog_dashboard.*
+import kotlinx.android.synthetic.main.fragment_avisos.*
 import kotlinx.android.synthetic.main.fragment_home.*
 
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.android.synthetic.main.fragment_home.view.rv_dashboard
+import kotlinx.android.synthetic.main.fragment_metodos.*
 
+import java.util.*
 
 
 @Suppress("ImplicitThis")
 class HomeFragment : Fragment() {
     lateinit var dbHandler: DBHandler
 
-    //Ya funca
+
     override fun onCreateView(
 
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,28 +49,109 @@ class HomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
 
-        val  root = inflater.inflate(R.layout.fragment_home, container, false)
-        dbHandler = DBHandler(root.context)
+        val binding = DataBindingUtil.inflate<FragmentHomeBinding>(
+            inflater,
+            R.layout.fragment_home,
+            container,
+            false
+        )
+        dbHandler = DBHandler(requireActivity())
+
+        val rv_dashboard = binding.rvDashboard
+        val btn = binding.fabDashboard
+        rv_dashboard.layoutManager = LinearLayoutManager(requireActivity())
 
 
-        root.rv_dashboard.layoutManager = LinearLayoutManager(requireActivity())
 
 
 
-        root.fab_dashboard.setOnClickListener {
+        btn.setOnClickListener {
+
+
             val dialog = AlertDialog.Builder(requireActivity())
             dialog.setTitle("Add Movement")
             val view = layoutInflater.inflate(R.layout.dialog_dashboard, null)
-            val movementName = view.findViewById<EditText>(R.id.ev_todo)
-            val movementdate = view.findViewById<EditText>(R.id.et_username)
+
+            val categoria = view.findViewById<TextView>(R.id.tv_show_categorie)
+            val datebutton = view.findViewById<Button>(R.id.show_datepicker_button)
+            val btns = view.findViewById<Button>(R.id.send_mount_button)
+            val showdate = view.findViewById<TextView>(R.id.fecha)
+            val monto = view.findViewById<EditText>(R.id.et_mount)
+            val descripcion = view.findViewById<EditText>(R.id.notes)
+            val btnCategoria = view.findViewById<Button>(R.id.button_categoria)
 
             dialog.setView(view)
 
+            datebutton.setOnClickListener {
+
+                val c = Calendar.getInstance()
+                val year = c.get(Calendar.YEAR)
+                val month = c.get(Calendar.MONTH)
+                val day = c.get(Calendar.DAY_OF_MONTH)
+
+
+                val datepicker = DatePickerDialog(
+                    view!!.context,
+                    DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+                        Toast.makeText(
+                            context,
+                            "Day:" + dayOfMonth + "\nMonth: " + (month + 1) + "\nYear: " + year,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        showdate.setText("Date:  " + dayOfMonth + " / " + (month + 1) + " / " + year)
+
+
+                    },
+                    year,
+                    month,
+                    day
+                )
+                datepicker.show()
+            }
+
+                btns.setOnClickListener {
+                Toast.makeText(context, "Mount: $${monto.text.toString() + " Fecha: ${showdate.text}" + " Description: ${descripcion.text}" + " Categoria: ${categoria.text}"}", Toast.LENGTH_SHORT).show()
+
+            }
+            btnCategoria.setOnClickListener {
+                val builder = AlertDialog.Builder(requireActivity())
+                builder.setTitle("   Escoge una categoria")
+
+                val categories = arrayOf("Comida", "Transporte", "Entretenimiento", "Salud", "Mascota", "Hogar", "Otro")
+                builder.setItems(categories) { dialog, which ->
+                    when (which) {
+                        0 -> { categoria.text = categories.get(0)
+                        }
+                        1 -> {categoria.text = categories.get(1)
+                        }
+                        2 -> { categoria.text = categories.get(2)
+                        }
+                        3 -> { categoria.text = categories.get(3)
+                        }
+                        4 -> { categoria.text = categories.get(4)
+                        }
+                        5 -> { categoria.text = categories.get(5)
+                        }
+                        6 -> { categoria.text = categories.get(6)
+                        }
+                        7 -> { categoria.text = categories.get(7)
+
+                        }
+                    }
+                }
+
+
+                val dialog = builder.create()
+                dialog.show()
+            }
+
             dialog.setPositiveButton("Add") { _: DialogInterface, _: Int ->
-                if (movementName.text.isNotEmpty() && movementdate.text.isNotEmpty()) {
+                if ( monto.text.isNotEmpty()) {
                     val movement = Movement()
-                    movement.name = movementName.text.toString()
-                    movement.date = movementdate.text.toString()
+                    movement.categoria = categoria.text.toString()
+                    movement.date = showdate.text.toString()
+                    movement.monto = monto.text.toString()
+                    movement.descripcion = descripcion.text.toString()
 
                     dbHandler.addMovement(movement)
                     refreshList()
@@ -73,32 +162,116 @@ class HomeFragment : Fragment() {
             }
             dialog.show()
         }
-        return root
-
+        return binding.root
 
     }
 
+
 /////////////////////////////////////////////////////////////////////////////////
+
+
+
+    override fun onResume() {
+          refreshList()
+        super.onResume()
+      }
+
+
+
+
 
     fun updateMovement(movement: Movement) {
         val dialog = AlertDialog.Builder(requireActivity())
         dialog.setTitle("Update Movement")
         val view = layoutInflater.inflate(R.layout.dialog_dashboard, null)
-        val MovementName = view.findViewById<EditText>(R.id.ev_todo)
-        //val MovementUser = view.findViewById<EditText>(R.id.et_username)
-        val Movementdate = view.findViewById<EditText>(R.id.et_username)
 
-        MovementName.setText(movement.name)
-        //   MovementUser.setText(movement.username)
-        Movementdate.setText(movement.date)
+        val categoria = view.findViewById<TextView>(R.id.tv_show_categorie)
+        val datebutton = view.findViewById<Button>(R.id.show_datepicker_button)
+        val btns = view.findViewById<Button>(R.id.send_mount_button)
+        val showdate = view.findViewById<TextView>(R.id.fecha)
+        val monto = view.findViewById<EditText>(R.id.et_mount)
+        val descripcion = view.findViewById<EditText>(R.id.notes)
+        val btnCategoria = view.findViewById<Button>(R.id.button_categoria)
+
+         categoria.setText(movement.categoria)
+        showdate.setText(movement.date)
+        monto.setText(movement.monto)
+        descripcion.setText(movement.descripcion)
 
         dialog.setView(view)
+
+        datebutton.setOnClickListener {
+
+            val c = Calendar.getInstance()
+            val year = c.get(Calendar.YEAR)
+            val month = c.get(Calendar.MONTH)
+            val day = c.get(Calendar.DAY_OF_MONTH)
+
+
+            val datepicker = DatePickerDialog(
+                view!!.context,
+                DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+                    Toast.makeText(
+                        context,
+                        "Day:" + dayOfMonth + "\nMonth: " + (month + 1) + "\nYear: " + year,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    showdate.setText("Date:  " + dayOfMonth + " / " + (month + 1) + " / " + year)
+
+
+                },
+                year,
+                month,
+                day
+            )
+            datepicker.show()
+        }
+
+        btns.setOnClickListener {
+            Toast.makeText(context, "Mount: $${monto.text.toString() + "Fecha: ${showdate .text}" + " Description: ${descripcion.text}" + " Categoria: ${categoria.text}"}", Toast.LENGTH_SHORT).show()
+
+        }
+        btnCategoria.setOnClickListener {
+            val builder = AlertDialog.Builder(requireActivity())
+            builder.setTitle("   Escoge una categoria")
+
+
+            val categories = arrayOf("Comida", "Transporte", "Entretenimiento", "Salud", "Mascota", "Hogar", "Otro")
+            builder.setItems(categories) { dialog, which ->
+                when (which) {
+                    0 -> { categoria.text = categories.get(0)
+                    }
+                    1 -> {categoria.text = categories.get(1)
+                    }
+                    2 -> { categoria.text = categories.get(2)
+                    }
+                    3 -> { categoria.text = categories.get(3)
+                    }
+                    4 -> { categoria.text = categories.get(4)
+                    }
+                    5 -> { categoria.text = categories.get(5)
+                    }
+                    6 -> { categoria.text = categories.get(6)
+                    }
+                    7 -> { categoria.text = categories.get(7)
+
+                    }
+                }
+            }
+
+
+            val dialog = builder.create()
+            dialog.show()
+        }
+
+
         dialog.setPositiveButton("Update") { _: DialogInterface, _: Int ->
 
-            if (MovementName.text.isNotEmpty() && Movementdate.text.isNotEmpty()) {
-                movement.name = MovementName.text.toString()
-                //   movement.username = MovementUser.text.toString()
-                movement.date = Movementdate.text.toString()
+            if (categoria.text.isNotEmpty() && showdate.text.isNotEmpty()) {
+                movement.categoria = categoria.text.toString()
+                movement.date = showdate.text.toString()
+                movement.monto = monto.text.toString()
+                movement.descripcion = descripcion.text.toString()
 
                 dbHandler.updateMovement(movement)
 
@@ -112,10 +285,7 @@ class HomeFragment : Fragment() {
     }
 
 
-    override fun onResume() {
-        refreshList()
-        super.onResume()
-    }
+
 
     private fun refreshList() {
         rv_dashboard.adapter = DashboardAdapter(this, dbHandler.getMovements())
@@ -142,10 +312,14 @@ class HomeFragment : Fragment() {
 
         override fun onBindViewHolder(holder: ViewHolder, p1: Int) {
 
-            holder.user.text = list[p1].date
-            holder.toDoName.text = list[p1].name
-            holder.toDoName.text = "Movimiento: " + holder.toDoName.text
-            holder.user.text = "Usuario: " + holder.user.text
+            holder.categoria .text = list[p1].categoria
+            holder.monto.text = list[p1].monto
+            holder.fecha.text = list[p1].date
+            holder.descripcion.text = list[p1].descripcion
+            holder.categoria.text = "Categoria: " + holder.categoria.text
+            holder.monto.text = "Monto: " + holder.monto.text
+            holder.fecha.text = "Fecha: " + holder.fecha.text
+            holder.descripcion.text = "Descripcion: " + holder.descripcion.text
 
 
 
@@ -184,8 +358,10 @@ class HomeFragment : Fragment() {
         }
 
         class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
-            val toDoName: TextView = v.findViewById(R.id.tv_todo_name)
-            val user: TextView = v.findViewById(R.id.tv_user)
+            val categoria: TextView = v.findViewById(R.id.tv_categoria)
+            val monto: TextView = v.findViewById(R.id.tv_monto)
+            val fecha: TextView = v.findViewById(R.id.tv_fecha)
+            val descripcion: TextView = v.findViewById(R.id.tv_descripcion)
             val menu: ImageView = v.findViewById(R.id.iv_menu)
         }
     }

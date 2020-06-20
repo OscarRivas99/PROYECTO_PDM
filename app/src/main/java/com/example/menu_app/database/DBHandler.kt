@@ -14,10 +14,12 @@ class DBHandler(val context: Context) : SQLiteOpenHelper(context, DB_NAME, null,
         val createMoneyAppTable = "CREATE TABLE $TABLE_MONEYAPP ( " +
                 "$COL_ID integer PRIMARY KEY AUTOINCREMENT," +
                 "$COL_CREATED_AT datetime DEFAULT CURRENT_TIMESTAMP," +
-                //"$COL_USER_NAME varchar," +
-                //"$COL_PASS varchar"+
-                "$COL_DATE varchar," +
-                "$COL_NAME varchar);"
+                "$COL_USER_ID varchar," +
+                "$COL_CATEGORIA varchar," +
+                "$COL_MONTO varchar," +
+                "$COL_DESCRIPCION varchar," +
+                "$COL_DATE varchar);"
+
 
         val createUserMoneyApp = "CREATE TABLE $USER_TABLE ( " +
                 "$COL_ID_USER integer PRIMARY KEY AUTOINCREMENT," +
@@ -36,9 +38,11 @@ class DBHandler(val context: Context) : SQLiteOpenHelper(context, DB_NAME, null,
     fun addMovement(movement: Movement): Boolean {
         val db = writableDatabase
         val cv = ContentValues()
-        cv.put(COL_NAME, movement.name)
-        // cv.put(COL_USER_NAME, movement.username)
+      //  cv.put(COL_ID_USER, movement.id_user)
+        cv.put(COL_CATEGORIA, movement.categoria)
         cv.put(COL_DATE, movement.date)
+        cv.put(COL_MONTO, movement.monto)
+        cv.put(COL_DESCRIPCION, movement.descripcion)
         val result = db.insert(TABLE_MONEYAPP, null, cv)
         return result != (-1).toLong()
     }
@@ -113,9 +117,11 @@ fun val_user():Boolean{
     fun updateMovement(movement: Movement) {
         val db = writableDatabase
         val cv = ContentValues()
-        cv.put(COL_NAME, movement.name)
-        //  cv.put(COL_USER_NAME, movement.username)
+       // cv.put(COL_ID_USER, movement.id_user)
+        cv.put(COL_CATEGORIA, movement.categoria)
         cv.put(COL_DATE, movement.date)
+        cv.put(COL_MONTO, movement.monto)
+        cv.put(COL_DESCRIPCION, movement.descripcion)
         db.update(TABLE_MONEYAPP, cv, "$COL_ID=?", arrayOf(movement.id.toString()))
     }
 
@@ -134,9 +140,12 @@ fun val_user():Boolean{
             do {
                 val movement = Movement()
                 movement.id = queryResult.getLong(queryResult.getColumnIndex(COL_ID))
-                movement.name = queryResult.getString(queryResult.getColumnIndex(COL_NAME))
-                //   movement.username = queryResult.getString(queryResult.getColumnIndex(COL_USER_NAME))
+              //  movement.id_user = queryResult.getInt(queryResult.getColumnIndex(COL_USER_ID))
+                movement.categoria = queryResult.getString(queryResult.getColumnIndex(COL_CATEGORIA))
                 movement.date = queryResult.getString(queryResult.getColumnIndex(COL_DATE))
+                movement.monto = queryResult.getString(queryResult.getColumnIndex(COL_MONTO))
+                movement.descripcion = queryResult.getString(queryResult.getColumnIndex(
+                    COL_DESCRIPCION))
 
                 result.add(movement)
 

@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
 
+
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
@@ -59,7 +60,7 @@ class MainActivity : AppCompatActivity() {
         //borre drawerlayout
         appBarConfiguration = AppBarConfiguration(
             setOf(
-              R.id.dashboardActivity,  R.id.nav_home, R.id.nav_categoria, R.id.nav_metodos, R.id.nav_avisos
+               R.id.nav_home, R.id.nav_categoria, R.id.nav_metodos, R.id.nav_avisos
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
