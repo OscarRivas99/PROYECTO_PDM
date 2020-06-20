@@ -12,6 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.example.menu_app.R
 import com.example.menu_app.databinding.FragmentMetodosBinding
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -22,7 +23,7 @@ import java.nio.file.Paths.get
 import java.util.*
 
 class MetodosFragment : Fragment() {
-
+ var bundle = Bundle()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,7 +44,7 @@ class MetodosFragment : Fragment() {
         val sendMount = binding.sendMountButton
         val et_mount = binding.etMount
         val date_button = binding.showDatepickerButton
-        val tv_date = binding.fecha
+        //val tv_date = binding.fecha
         val notes = binding.notes
 
         val categoria = binding.tvShowCategorie
@@ -77,7 +78,11 @@ class MetodosFragment : Fragment() {
         }
 
         sendMount.setOnClickListener {
-            Toast.makeText(context, "Mount: $${et_mount.text.toString() + " ${tv_date.text}" + " Description: ${notes.text}" + " Categoria: ${categoria.text}"}", Toast.LENGTH_SHORT).show()
+         //   Toast.makeText(context, "Mount: $${et_mount.text.toString() + " ${tv_date.text}" + " Description: ${notes.text}" + " Categoria: ${categoria.text}"}", Toast.LENGTH_SHORT).show()
+
+
+
+          //  findNavController().navigate(MetodosFragmentDirections.actionNavMetodosToNavHome(categoria.text.toString(),et_mount.text.toString(),tv_date.text.toString(),notes.text.toString()))
         }
 
         return binding.root
@@ -106,7 +111,7 @@ class MetodosFragment : Fragment() {
                     "Day:" + dayOfMonth + "\nMonth: " + (month + 1) + "\nYear: " + year,
                     Toast.LENGTH_SHORT
                 ).show()
-                fecha.setText("Date:  " + dayOfMonth + " / " + (month + 1) + " / " + year)
+            //    fecha.setText("Date:  " + dayOfMonth + " / " + (month + 1) + " / " + year)
 
             },
             year,
