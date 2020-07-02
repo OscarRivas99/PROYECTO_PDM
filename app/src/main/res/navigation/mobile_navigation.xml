@@ -62,6 +62,11 @@
         android:name="com.example.menu_app.ui.avisos.AvisosFragments"
         android:label="Alert"
         tools:layout="@layout/fragment_avisos" />
+    <fragment
+        android:id="@+id/perfil"
+        android:name="com.example.menu_app.ui.perfil.perfil"
+        android:label="Perfil"
+        tools:layout="@layout/fragment_perfil" />
 
     //Modificando
 

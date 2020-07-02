@@ -174,6 +174,37 @@ fun val_user():Boolean{
         return result
     }
 
+    fun getCredentials(): MutableList<User> {
+        val result: MutableList<User> = ArrayList()
+        val db = readableDatabase
+        val queryResult = db.rawQuery("SELECT * from $USER_TABLE", null)
+        if (queryResult.moveToFirst()) {
+            do {
+                val user = User()
+                user.id = queryResult.getLong(queryResult.getColumnIndex(COL_ID_USER))
+                //  movement.id_user = queryResult.getInt(queryResult.getColumnIndex(COL_USER_ID))
+                user.username = queryResult.getString(queryResult.getColumnIndex(COL_USER_NAME))
+                user.pass = queryResult.getString(queryResult.getColumnIndex(COL_PASS))
+
+
+                result.add(user)
+
+            } while (queryResult.moveToNext())
+        }
+        queryResult.close()
+        return result
+    }
+
+    fun updateCredentials(user: User) {
+        val db = writableDatabase
+        val cv = ContentValues()
+        // cv.put(COL_ID_USER, movement.id_user)
+        cv.put(COL_USER_NAME, user.username)
+        cv.put(COL_PASS, user.pass)
+
+        db.update(USER_TABLE, cv, "$COL_ID_USER=?", arrayOf(user.id.toString()))
+    }
+
 
     //Consultas de cuentas
 
