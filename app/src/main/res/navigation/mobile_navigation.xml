@@ -63,4 +63,17 @@
         android:label="Alert"
         tools:layout="@layout/fragment_avisos" />
 
+    //Modificando
+
+    <fragment
+        android:id="@+id/nav_cuentas"
+        android:name="com.example.menu_app.ui.accounts.AccountsFragment"
+        android:label="@string/menu_cuentas"
+        tools:layout="@layout/fragment_accounts">
+        <action
+            android:id="@+id/action_nav_home_to_nav_cuentas"
+            app:destination="@id/nav_cuentas"
+        />
+    </fragment>
+
 </navigation>

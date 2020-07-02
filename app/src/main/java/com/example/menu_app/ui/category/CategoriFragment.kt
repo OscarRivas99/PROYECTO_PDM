@@ -37,6 +37,7 @@ class CategoriFragment : Fragment() {
        val btn_ropa = binding.btnRopa
        val btn_salud = binding.btnSalud
        val btn_viajes= binding.btnViajes
+
        val btn_gimnasio = binding.btnGimnacio
 
 

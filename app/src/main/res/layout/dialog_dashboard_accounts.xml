@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+
+
+    <ImageView
+        android:id="@+id/image_escritura"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginLeft="48dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/escritura"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editText_nombre"
+        android:layout_width="187dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.366"
+        app:layout_constraintStart_toEndOf="@+id/image_escritura"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinner_accounts"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="60dp"
+        android:text="Efectivo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.285"
+        app:layout_constraintStart_toEndOf="@+id/image_cuentas"
+        app:layout_constraintTop_toBottomOf="@+id/editText_nombre" />
+
+    <ImageView
+        android:id="@+id/image_saldo"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginLeft="48dp"
+        android:layout_marginTop="44dp"
+        android:src="@drawable/dinero"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_cuentas" />
+
+    <EditText
+        android:id="@+id/editText_saldo"
+        android:layout_width="wrap_content"
+        android:layout_height="38dp"
+        android:layout_marginTop="52dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Saldo inicial"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.32"
+        app:layout_constraintStart_toEndOf="@+id/image_saldo"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_accounts" />
+
+    <ImageView
+        android:id="@+id/image_cuentas"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginLeft="48dp"
+        android:layout_marginTop="44dp"
+        android:src="@drawable/cuentas"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_escritura" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

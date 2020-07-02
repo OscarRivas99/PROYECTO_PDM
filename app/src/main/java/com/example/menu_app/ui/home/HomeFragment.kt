@@ -1,7 +1,6 @@
 package com.example.menu_app.ui.home
 
 import android.app.DatePickerDialog
-import android.app.PendingIntent.getActivity
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,30 +8,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.DataBindingUtil.setContentView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.Observer
 
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.menu_app.Classes.Movement
 
 import com.example.menu_app.R
 import com.example.menu_app.database.DBHandler
-import com.example.menu_app.databinding.FragmentCategoriaBinding
 import com.example.menu_app.databinding.FragmentHomeBinding
-import com.example.menu_app.ui.slideshow.MetodosFragmentDirections
-import kotlinx.android.synthetic.main.dialog_dashboard.*
-import kotlinx.android.synthetic.main.fragment_avisos.*
 import kotlinx.android.synthetic.main.fragment_home.*
-
-import kotlinx.android.synthetic.main.fragment_home.view.*
-import kotlinx.android.synthetic.main.fragment_home.view.rv_dashboard
-import kotlinx.android.synthetic.main.fragment_metodos.*
 
 import java.util.*
 
@@ -60,9 +46,6 @@ class HomeFragment : Fragment() {
         val rv_dashboard = binding.rvDashboard
         val btn = binding.fabDashboard
         rv_dashboard.layoutManager = LinearLayoutManager(requireActivity())
-
-
-
 
 
         btn.setOnClickListener {
@@ -292,7 +275,7 @@ class HomeFragment : Fragment() {
     }
 
 
-
+ //desde aqui
     class DashboardAdapter(val fragment: HomeFragment, val list: MutableList<Movement>) :
         RecyclerView.Adapter<DashboardAdapter.ViewHolder>() {
         override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
