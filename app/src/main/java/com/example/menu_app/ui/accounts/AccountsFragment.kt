@@ -91,10 +91,7 @@ class AccountsFragment : Fragment() {
 
                     }
                     // A partir de acá, podemos asumir que la llamada es genuina y generada por el usuario
-                    Toast.makeText(
-                        context!!,
-                        "onItemSelected position: $position. id:$id.", Toast.LENGTH_SHORT
-                    ).show()
+
                     valor_cuenta = cuenta.getItemAtPosition(position).toString()
 
                 }

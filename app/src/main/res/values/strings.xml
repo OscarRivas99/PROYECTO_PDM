@@ -16,6 +16,7 @@
     <string name="Ttitle_app">Bill Money App</string>
 
     <string name="Avisos">Alert</string>
+    <string name="perfil">Perfil</string>
     <string name="Ingresar">ingresar</string>
     <string name="recordatorio">Ingrese su recordatorio</string>
     <string name="recordatori">Ingrese la fecha</string>

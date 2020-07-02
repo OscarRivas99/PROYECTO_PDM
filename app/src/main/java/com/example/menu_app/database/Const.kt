@@ -3,7 +3,7 @@ package com.example.menu_app.database
 
 
 
-const val DB_NAME = "BillMoney1.17"
+const val DB_NAME = "BillMoney1.19"
 
 const val DB_VERSION = 1
 const val TABLE_MONEYAPP = "MoneyApp"

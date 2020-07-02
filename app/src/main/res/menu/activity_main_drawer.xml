@@ -9,23 +9,21 @@
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_icon"
             android:title="@string/menu_home" />
-        <item
-            android:id="@+id/nav_categoria"
-            android:icon="@drawable/ic_web"
-            android:title="@string/menu_categoria" />
+
         <item
             android:id="@+id/nav_cuentas"
-            android:icon="@drawable/ic_launcher_background"
+            android:icon="@drawable/baseline_monetization_on_black_24dp"
             android:title="Accounts"
             />
 
-        <item
-            android:id="@+id/nav_metodos"
-            android:icon="@drawable/ic_anadir"
-            android:title="@string/menu_metodos" />
+
         <item
             android:id="@+id/nav_avisos"
             android:icon="@drawable/ic_alert"
             android:title="@string/Avisos" />
+        <item
+            android:id="@+id/perfil"
+            android:icon="@drawable/round_account_circle_black_24dp"
+            android:title="@string/perfil" />
     </group>
 </menu>

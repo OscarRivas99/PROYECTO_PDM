@@ -12,7 +12,7 @@
         <activity android:name=".DashboardActivity">
 
         </activity>
-        <activity android:name=".animation">
+        <activity android:name=".ui.animation.animation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
