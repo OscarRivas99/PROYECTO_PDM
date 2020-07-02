@@ -5,6 +5,7 @@ import android.content.Context
 import android.database.DatabaseUtils
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import com.example.menu_app.Classes.Accounts
 import com.example.menu_app.Classes.Movement
 import com.example.menu_app.Classes.User
 
@@ -24,10 +25,17 @@ class DBHandler(val context: Context) : SQLiteOpenHelper(context, DB_NAME, null,
         val createUserMoneyApp = "CREATE TABLE $USER_TABLE ( " +
                 "$COL_ID_USER integer PRIMARY KEY AUTOINCREMENT," +
                 "$COL_USER_NAME varchar," +
-                "$COL_PASS varchar);"+
+                "$COL_PASS varchar);"
+
+        val createAccountsMoneyApp = "CREATE TABLE $ACCOUNTS_TABLE ( " +
+                "$COL_ID_ACCOUNT integer PRIMARY KEY AUTOINCREMENT," +
+                "$COL_NOMBRE varchar," +
+                "$COL_CUENTAS varchar,"+
+                "$COL_SALDO varchar);"+
 
         db.execSQL(createMoneyAppTable)
         db.execSQL(createUserMoneyApp)
+        db.execSQL(createAccountsMoneyApp)
 
 
     }
@@ -53,6 +61,17 @@ class DBHandler(val context: Context) : SQLiteOpenHelper(context, DB_NAME, null,
         cv.put(COL_PASS, user.pass)
         val result =db.insert(USER_TABLE, null, cv)
 return result != (-1).toLong()
+    }
+
+    //Agregando Cuentas
+    fun addAccounts(accounts: Accounts):Boolean{
+        val db = writableDatabase
+        val cv = ContentValues()
+        cv.put(COL_NOMBRE, accounts.nombre)
+        cv.put(COL_CUENTAS, accounts.cuenta)
+        cv.put(COL_SALDO, accounts.saldo)
+        val result =db.insert(ACCOUNTS_TABLE, null, cv)
+        return result !=(-1).toLong()
     }
 
 fun val_user():Boolean{
@@ -148,6 +167,35 @@ fun val_user():Boolean{
                     COL_DESCRIPCION))
 
                 result.add(movement)
+
+            } while (queryResult.moveToNext())
+        }
+        queryResult.close()
+        return result
+    }
+
+
+    //Consultas de cuentas
+
+    fun deleteAccounts(AccountId: Long){
+        val db = writableDatabase
+        db.delete(ACCOUNTS_TABLE, "$COL_ID=?", arrayOf(AccountId.toString()))
+    }
+
+    fun getAccounts(): MutableList<Accounts> {
+        val result: MutableList<Accounts> = ArrayList()
+        val db = readableDatabase
+        val queryResult = db.rawQuery("SELECT * from $ACCOUNTS_TABLE", null)
+        if (queryResult.moveToFirst()) {
+            do {
+                val accounts = Accounts()
+                accounts.id = queryResult.getLong(queryResult.getColumnIndex(COL_ID))
+                accounts.nombre = queryResult.getString(queryResult.getColumnIndex(COL_NOMBRE))
+                accounts.cuenta = queryResult.getString(queryResult.getColumnIndex(COL_CUENTAS))
+                accounts.saldo = queryResult.getString(queryResult.getColumnIndex(COL_SALDO))
+
+
+                result.add(accounts)
 
             } while (queryResult.moveToNext())
         }

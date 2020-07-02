@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
         //borre drawerlayout
         appBarConfiguration = AppBarConfiguration(
             setOf(
-               R.id.nav_home, R.id.nav_categoria, R.id.nav_metodos, R.id.nav_avisos
+               R.id.nav_home, R.id.nav_categoria, R.id.nav_metodos, R.id.nav_avisos, R.id.nav_cuentas //agregando nav_cuentas
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

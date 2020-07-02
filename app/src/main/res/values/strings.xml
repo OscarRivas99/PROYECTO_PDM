@@ -10,6 +10,7 @@
     <string name="menu_home">Home</string>
     <string name="menu_categoria">Categories</string>
     <string name="menu_metodos">Add Movement</string>
+    <string name="menu_cuentas">Accounts</string> <!--modificada -->
 
     <string name="home_second">Home Second</string>
     <string name="Ttitle_app">Bill Money App</string>
@@ -30,6 +31,12 @@
         <item>Compras</item>
         <item>Automovil</item>
         <item>Salud</item>
+    </string-array>
+
+    <string-array name="cuentas">
+        <item>Efectivo</item>
+        <item>Débito</item>
+        <item>Crédito</item>
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
