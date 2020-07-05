@@ -1,10 +1,7 @@
 package com.example.menu_app.database
 
-
-
-
-const val DB_NAME = "BillMoney1.19"
-
+const val DB_NAME = "BillMoney1.24"
+const val COL_CUENTA_NAME = "nombre_cuenta"
 const val DB_VERSION = 1
 const val TABLE_MONEYAPP = "MoneyApp"
 const val COL_ID_USER ="id"

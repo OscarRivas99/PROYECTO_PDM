@@ -9,5 +9,6 @@ class Movement {
     var id_user = 0
     var descripcion = " "
     var createdAt = ""
+    var nombre_cuenta = " "
 
 }

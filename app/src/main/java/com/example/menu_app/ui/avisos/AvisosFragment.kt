@@ -15,11 +15,7 @@ import kotlinx.android.synthetic.main.fragment_avisos.*
 import java.util.*
 import javax.xml.datatype.DatatypeConstants.MONTHS
 
-
-/**
- * A simple [Fragment] subclass.
- */
-class AvisosFragments : Fragment(), AdapterView.OnItemSelectedListener {
+    class AvisosFragments : Fragment(), AdapterView.OnItemSelectedListener {
     var categorias = arrayOf("Factura", "Prestamos", "Deposito", "Banco", "Estudio", "Tarjeta credito", "Tarjeta de cretido", "Alquiler de casa", "Alquiler de apartamento", "Abono a cuenta" )
     var spinner: Spinner? = null
     var textView_msg: TextView? = null
