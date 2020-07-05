@@ -66,6 +66,22 @@
         android:textStyle="bold"
         />
 
+    <TextView
+        android:id="@+id/tv_nombre_cuenta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:layout_marginBottom="8dp"
+        android:layout_toStartOf="@+id/iv_menu"
+        android:layout_toLeftOf="@id/iv_menu"
+        android:background="#D3EC440F"
+        android:padding="16dp"
+        android:paddingLeft="16dp"
+        android:paddingTop="30dp"
+        android:text="nombre_cuenta"
+        android:textStyle="bold"
+        />
+
 
 
     <ImageView

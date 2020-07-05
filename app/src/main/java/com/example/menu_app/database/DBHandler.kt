@@ -2,7 +2,7 @@ package com.example.menu_app.database
 
 import android.content.ContentValues
 import android.content.Context
-import android.database.DatabaseUtils
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.example.menu_app.Classes.Accounts
@@ -19,8 +19,8 @@ class DBHandler(val context: Context) : SQLiteOpenHelper(context, DB_NAME, null,
                 "$COL_CATEGORIA varchar," +
                 "$COL_MONTO varchar," +
                 "$COL_DESCRIPCION varchar," +
-                "$COL_DATE varchar);"
-
+                "$COL_DATE varchar, "+
+                "$COL_CUENTA_NAME varchar);"
 
         val createUserMoneyApp = "CREATE TABLE $USER_TABLE ( " +
                 "$COL_ID_USER integer PRIMARY KEY AUTOINCREMENT," +
@@ -51,6 +51,8 @@ class DBHandler(val context: Context) : SQLiteOpenHelper(context, DB_NAME, null,
         cv.put(COL_DATE, movement.date)
         cv.put(COL_MONTO, movement.monto)
         cv.put(COL_DESCRIPCION, movement.descripcion)
+        cv.put(COL_CUENTA_NAME,movement.nombre_cuenta)
+
         val result = db.insert(TABLE_MONEYAPP, null, cv)
         return result != (-1).toLong()
     }
@@ -62,6 +64,8 @@ class DBHandler(val context: Context) : SQLiteOpenHelper(context, DB_NAME, null,
         val result =db.insert(USER_TABLE, null, cv)
 return result != (-1).toLong()
     }
+
+
 
     //Agregando Cuentas
     fun addAccounts(accounts: Accounts):Boolean{
@@ -96,8 +100,21 @@ fun val_user():Boolean{
 
     return false
 }
+    fun GetAllCount(): MutableList<Accounts> {
+        val result: MutableList<Accounts> = ArrayList()
+        val db = readableDatabase
+        val queryResult = db.rawQuery("SELECT * from $ACCOUNTS_TABLE " , null)
+        if (queryResult.moveToFirst()) {
+            do {
+                val counts = Accounts()
+                counts.nombre = queryResult.getString(queryResult.getColumnIndex(COL_NOMBRE))
 
-
+                result.add(counts)
+            } while (queryResult.moveToNext())
+        }
+        queryResult.close()
+        return result
+    }
 
 
 
@@ -141,6 +158,7 @@ fun val_user():Boolean{
         cv.put(COL_DATE, movement.date)
         cv.put(COL_MONTO, movement.monto)
         cv.put(COL_DESCRIPCION, movement.descripcion)
+        cv.put(COL_CUENTA_NAME, movement.nombre_cuenta)
         db.update(TABLE_MONEYAPP, cv, "$COL_ID=?", arrayOf(movement.id.toString()))
     }
 
@@ -163,8 +181,8 @@ fun val_user():Boolean{
                 movement.categoria = queryResult.getString(queryResult.getColumnIndex(COL_CATEGORIA))
                 movement.date = queryResult.getString(queryResult.getColumnIndex(COL_DATE))
                 movement.monto = queryResult.getString(queryResult.getColumnIndex(COL_MONTO))
-                movement.descripcion = queryResult.getString(queryResult.getColumnIndex(
-                    COL_DESCRIPCION))
+                movement.descripcion = queryResult.getString(queryResult.getColumnIndex(COL_DESCRIPCION))
+                movement.nombre_cuenta = queryResult.getString(queryResult.getColumnIndex(COL_CUENTA_NAME))
 
                 result.add(movement)
 
@@ -233,6 +251,20 @@ fun val_user():Boolean{
         queryResult.close()
         return result
     }
+
+      fun ingreso(monto: String, nombreCuenta: String) {
+       val db = writableDatabase
+       val ubdate_monto = ("UPDATE $ACCOUNTS_TABLE SET  $COL_SALDO = $monto + $COL_SALDO  WHERE $COL_NOMBRE = '$nombreCuenta'")
+       db.rawQuery(ubdate_monto,null)
+          db.execSQL(ubdate_monto)
+   }
+    fun egreso(monto: String, nombreCuenta: String) {
+        val db = writableDatabase
+        val ubdate_monto = ("UPDATE $ACCOUNTS_TABLE SET  $COL_SALDO =  $COL_SALDO - $monto  WHERE $COL_NOMBRE = '$nombreCuenta'")
+        db.rawQuery(ubdate_monto,null)
+        db.execSQL(ubdate_monto)
+    }
+
 
 
 }

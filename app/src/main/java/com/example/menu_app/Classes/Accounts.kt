@@ -5,4 +5,8 @@ class Accounts {
     var nombre = ""
     var cuenta = ""
     var saldo = ""
+
+    override fun toString(): String{
+        return nombre
+    }
 }
