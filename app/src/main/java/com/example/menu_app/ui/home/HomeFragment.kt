@@ -2,7 +2,10 @@ package com.example.menu_app.ui.home
 
 import android.app.DatePickerDialog
 import android.content.DialogInterface
+
+import android.content.Intent
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +13,7 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.menu_app.Classes.Movement
@@ -46,151 +50,176 @@ class HomeFragment : Fragment() {
         val btn = binding.fabDashboard
         rv_dashboard.layoutManager = LinearLayoutManager(requireActivity())
 
-        btn.setOnClickListener {
+
+        if (dbHandler.GetAllCount().isEmpty()){
+            findNavController().navigate(R.id.action_nav_home_to_nav_cuentas2)
+        }else {
+
+            btn.setOnClickListener {
+
+                val dialog = AlertDialog.Builder(requireActivity())
+                dialog.setTitle("Add Movement")
+                val view = layoutInflater.inflate(R.layout.dialog_dashboard, null)
+
+                val categoria = view.findViewById<TextView>(R.id.tv_show_categorie)
+                val datebutton = view.findViewById<Button>(R.id.show_datepicker_button)
+                val btns = view.findViewById<Button>(R.id.send_mount_button)
+                val showdate = view.findViewById<TextView>(R.id.fecha)
+                val monto = view.findViewById<EditText>(R.id.et_mount)
+                val descripcion = view.findViewById<EditText>(R.id.notes)
+                val btnCategoria = view.findViewById<Button>(R.id.button_categoria)
+                ////////////////////////////////////////////////////////////////////////
+                val cuenta = view.findViewById<Spinner>(R.id.spn_count)
+
+                dialog.setView(view)
+                // spineer inicio
+
+                val cuentas1 = dbHandler.GetAllCount()
+                val cuentas2 = cuentas1.toTypedArray()
+                val arrayAdapter =
+                    ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, cuentas2)
+                cuenta.adapter = arrayAdapter
+                ////////////////////////////////////////////////////////////////////////
+                cuenta.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                    override fun onNothingSelected(parent: AdapterView<*>?) {
+                        Toast.makeText(context!!, "onNothingSelected", Toast.LENGTH_SHORT).show()
+                    }
 
 
-            val dialog = AlertDialog.Builder(requireActivity())
-            dialog.setTitle("Add Movement")
-            val view = layoutInflater.inflate(R.layout.dialog_dashboard, null)
+                    override fun onItemSelected(
+                        parent: AdapterView<*>?,
+                        view: View?,
+                        position: Int,
+                        id: Long
+                    ) {
+                        if (!banderaListener) {  //Se agrega esta bandera ya que el listener puede ser invocado cuando se crea el fragmento
+                            banderaListener = true
 
-            val categoria = view.findViewById<TextView>(R.id.tv_show_categorie)
-            val datebutton = view.findViewById<Button>(R.id.show_datepicker_button)
-            val btns = view.findViewById<Button>(R.id.send_mount_button)
-            val showdate = view.findViewById<TextView>(R.id.fecha)
-            val monto = view.findViewById<EditText>(R.id.et_mount)
-            val descripcion = view.findViewById<EditText>(R.id.notes)
-            val btnCategoria = view.findViewById<Button>(R.id.button_categoria)
-            ////////////////////////////////////////////////////////////////////////
-            val cuenta = view.findViewById<Spinner>(R.id.spn_count)
+                        }
+                        // A partir de acá, podemos asumir que la llamada es genuina y generada por el usuario
 
-            dialog.setView(view)
-            // spineer inicio
-
-            val cuentas1 = dbHandler.GetAllCount()
-            val cuentas2 = cuentas1.toTypedArray()
-            val arrayAdapter = ArrayAdapter(requireContext(),android.R.layout.simple_spinner_item, cuentas2)
-            cuenta.adapter = arrayAdapter
-            ////////////////////////////////////////////////////////////////////////
-            cuenta.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                    Toast.makeText(context!!, "onNothingSelected", Toast.LENGTH_SHORT).show()
-                }
-
-
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    if (!banderaListener) {  //Se agrega esta bandera ya que el listener puede ser invocado cuando se crea el fragmento
-                        banderaListener = true
+                        nombre_cuenta = cuenta.getItemAtPosition(position).toString()
 
                     }
-                    // A partir de acá, podemos asumir que la llamada es genuina y generada por el usuario
-
-                    nombre_cuenta = cuenta.getItemAtPosition(position).toString()
-
                 }
-            }
 
 
-            datebutton.setOnClickListener {
+                datebutton.setOnClickListener {
 
-                val c = Calendar.getInstance()
-                val year = c.get(Calendar.YEAR)
-                val month = c.get(Calendar.MONTH)
-                val day = c.get(Calendar.DAY_OF_MONTH)
-
-
-                val datepicker = DatePickerDialog(
-                    view!!.context,
-                    DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-                        Toast.makeText(
-                            context,
-                            "Day:" + dayOfMonth + "\nMonth: " + (month + 1) + "\nYear: " + year,
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        showdate.setText("Date:  " + dayOfMonth + " / " + (month + 1) + " / " + year)
+                    val c = Calendar.getInstance()
+                    val year = c.get(Calendar.YEAR)
+                    val month = c.get(Calendar.MONTH)
+                    val day = c.get(Calendar.DAY_OF_MONTH)
 
 
-                    },
-                    year,
-                    month,
-                    day
-                )
-                datepicker.show()
-            }
+                    val datepicker = DatePickerDialog(
+                        view!!.context,
+                        DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+                            Toast.makeText(
+                                context,
+                                "Day:" + dayOfMonth + "\nMonth: " + (month + 1) + "\nYear: " + year,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            showdate.setText("Date:  " + dayOfMonth + " / " + (month + 1) + " / " + year)
+
+
+                        },
+                        year,
+                        month,
+                        day
+                    )
+                    datepicker.show()
+                }
 
 
                 btns.setOnClickListener {
-                Toast.makeText(context, "Mount: $${monto.text.toString() + " Fecha: ${showdate.text}" + " Description: ${descripcion.text}" + " Categoria: ${categoria.text}"}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        context,
+                        "Mount: $${monto.text.toString() + " Fecha: ${showdate.text}" + " Description: ${descripcion.text}" + " Categoria: ${categoria.text}"}",
+                        Toast.LENGTH_SHORT
+                    ).show()
 
-            }
-            //show_count()
+                }
+                //show_count()
 
-            btnCategoria.setOnClickListener {
-                val builder = AlertDialog.Builder(requireActivity())
-                builder.setTitle("   Escoge una categoria")
+                btnCategoria.setOnClickListener {
+                    val builder = AlertDialog.Builder(requireActivity())
+                    builder.setTitle("   Escoge una categoria")
 
-                val categories = arrayOf("Comida", "Transporte", "Entretenimiento", "Salud", "Mascota", "Hogar", "Otro")
-                builder.setItems(categories) { dialog, which ->
-                    when (which) {
-                        0 -> { categoria.text = categories.get(0)
-                        }
-                        1 -> {categoria.text = categories.get(1)
-                        }
-                        2 -> { categoria.text = categories.get(2)
-                        }
-                        3 -> { categoria.text = categories.get(3)
-                        }
-                        4 -> { categoria.text = categories.get(4)
-                        }
-                        5 -> { categoria.text = categories.get(5)
-                        }
-                        6 -> { categoria.text = categories.get(6)
-                        }
-                        7 -> { categoria.text = categories.get(7)
+                    val categories = arrayOf(
+                        "Comida",
+                        "Transporte",
+                        "Entretenimiento",
+                        "Salud",
+                        "Mascota",
+                        "Hogar",
+                        "Otro"
+                    )
+                    builder.setItems(categories) { dialog, which ->
+                        when (which) {
+                            0 -> {
+                                categoria.text = categories.get(0)
+                            }
+                            1 -> {
+                                categoria.text = categories.get(1)
+                            }
+                            2 -> {
+                                categoria.text = categories.get(2)
+                            }
+                            3 -> {
+                                categoria.text = categories.get(3)
+                            }
+                            4 -> {
+                                categoria.text = categories.get(4)
+                            }
+                            5 -> {
+                                categoria.text = categories.get(5)
+                            }
+                            6 -> {
+                                categoria.text = categories.get(6)
+                            }
+                            7 -> {
+                                categoria.text = categories.get(7)
 
+                            }
                         }
                     }
+
+
+                    val dialog = builder.create()
+                    dialog.show()
                 }
 
+                dialog.setPositiveButton("Add") { _: DialogInterface, _: Int ->
+                    if (monto.text.isNotEmpty()) {
+                        val movement = Movement()
+                        movement.categoria = categoria.text.toString()
+                        movement.date = showdate.text.toString()
+                        movement.monto = monto.text.toString()
+                        movement.descripcion = descripcion.text.toString()
+                        movement.nombre_cuenta = nombre_cuenta
+                        dbHandler.addMovement(movement)
 
-                val dialog = builder.create()
+                        //ingresos
+                        //egresos
+                        val tipo_movimiento1 = view.findViewById<Switch>(R.id.tipo_movimiento)
+                        val switchState: Boolean = tipo_movimiento1.isChecked()
+                        if (switchState) {
+                            dbHandler.egreso(movement.monto, movement.nombre_cuenta)
+                        } else {
+                            dbHandler.ingreso(movement.monto, movement.nombre_cuenta)
+                        }
+                        //termina ingrso
+                        refreshList()
+
+
+                    }
+                }
+                dialog.setNegativeButton("Cancel") { _: DialogInterface, _: Int ->
+
+                }
                 dialog.show()
             }
-
-            dialog.setPositiveButton("Add") { _: DialogInterface, _: Int ->
-                if ( monto.text.isNotEmpty()) {
-                    val movement = Movement()
-                    movement.categoria = categoria.text.toString()
-                    movement.date = showdate.text.toString()
-                    movement.monto = monto.text.toString()
-                    movement.descripcion = descripcion.text.toString()
-                    movement.nombre_cuenta = nombre_cuenta
-                    dbHandler.addMovement(movement)
-
-                    //ingresos
-                    //egresos
-                    val tipo_movimiento1 = view.findViewById<Switch>(R.id.tipo_movimiento)
-                    val switchState: Boolean = tipo_movimiento1.isChecked()
-                    if(switchState){
-                        dbHandler.egreso(movement.monto, movement.nombre_cuenta)
-                    }else{
-                        dbHandler.ingreso(movement.monto, movement.nombre_cuenta)
-                    }
-                    //termina ingrso
-                    refreshList()
-
-
-
-                }
-            }
-            dialog.setNegativeButton("Cancel") { _: DialogInterface, _: Int ->
-
-            }
-            dialog.show()
         }
         return binding.root
 
@@ -206,6 +235,12 @@ class HomeFragment : Fragment() {
           refreshList()
         super.onResume()
       }
+
+
+
+
+
+
 
 
 
@@ -349,6 +384,7 @@ class HomeFragment : Fragment() {
     }
 
 
+
  //desde aqui
     class DashboardAdapter(val fragment: HomeFragment, val list: MutableList<Movement>) :
         RecyclerView.Adapter<DashboardAdapter.ViewHolder>() {
@@ -366,6 +402,7 @@ class HomeFragment : Fragment() {
         override fun getItemCount(): Int {
             return list.size
         }
+
 
         override fun onBindViewHolder(holder: ViewHolder, p1: Int) {
 

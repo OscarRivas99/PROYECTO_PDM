@@ -8,14 +8,9 @@
     <fragment
         android:id="@+id/nav_home"
         android:name="com.example.menu_app.ui.home.HomeFragment"
-        android:label="@string/menu_home"
+        android:label="Movimientos"
         tools:layout="@layout/fragment_home">
-        <action
-            android:id="@+id/action_nav_home_to_nav_categoria"
-            app:destination="@id/nav_categoria" />
-        <action
-            android:id="@+id/action_nav_home_to_nav_metodos"
-            app:destination="@id/nav_metodos" />
+
         <argument
             android:name="categoria"
             app:argType="string" />
@@ -28,26 +23,23 @@
         <argument
             android:name="descripcion"
             app:argType="string" />
+        <action
+            android:id="@+id/action_nav_home_self2"
+            app:destination="@id/nav_home"
+            app:popUpTo="@id/nav_home" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_cuentas2"
+            app:destination="@id/nav_cuentas" />
     </fragment>
 
-    <fragment
-        android:id="@+id/nav_categoria"
-        android:name="com.example.menu_app.ui.category.CategoriFragment"
-        android:label="@string/menu_categoria"
-        tools:layout="@layout/fragment_categoria" >
-        <action
-            android:id="@+id/action_nav_categoria_to_nav_metodos"
-            app:destination="@id/nav_metodos" />
-    </fragment>
+
 
     <fragment
         android:id="@+id/nav_metodos"
         android:name="com.example.menu_app.ui.slideshow.MetodosFragment"
         android:label="@string/menu_metodos"
         tools:layout="@layout/fragment_metodos" >
-        <action
-            android:id="@+id/action_nav_metodos_to_nav_categoria"
-            app:destination="@id/nav_categoria" />
+
         <argument
             android:name="categoria"
             app:argType="string"
@@ -60,7 +52,7 @@
     <fragment
         android:id="@+id/nav_avisos"
         android:name="com.example.menu_app.ui.avisos.AvisosFragments"
-        android:label="Alert"
+        android:label="Alertas"
         tools:layout="@layout/fragment_avisos" />
     <fragment
         android:id="@+id/perfil"
@@ -73,12 +65,16 @@
     <fragment
         android:id="@+id/nav_cuentas"
         android:name="com.example.menu_app.ui.accounts.AccountsFragment"
-        android:label="@string/menu_cuentas"
+        android:label="Cuentas"
         tools:layout="@layout/fragment_accounts">
         <action
             android:id="@+id/action_nav_home_to_nav_cuentas"
             app:destination="@id/nav_cuentas"
         />
     </fragment>
+    <activity
+        android:id="@+id/login2"
+        android:name="com.example.menu_app.ui.login.login2"
+        android:label="login2" />
 
 </navigation>

@@ -1,18 +1,10 @@
 package com.example.menu_app
 
-import android.app.AlertDialog
-import android.content.DialogInterface
-import android.content.Intent
+
 import android.os.Bundle
-import android.os.Handler
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.View
-import android.view.ViewGroup
-import android.view.animation.AnimationUtils
-import android.widget.*
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
+
+import android.view.*
+
 import com.google.android.material.navigation.NavigationView
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -22,16 +14,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.menu_app.Classes.Movement
-import com.example.menu_app.database.DBHandler
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.app_bar_main.*
-import kotlinx.android.synthetic.main.fragment_home.*
 
-import kotlinx.android.synthetic.main.fragment_metodos.*
-import kotlinx.android.synthetic.main.rv_child_dashboard.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -60,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         //borre drawerlayout
         appBarConfiguration = AppBarConfiguration(
             setOf(
-               R.id.nav_home, R.id.nav_categoria, R.id.nav_metodos, R.id.nav_avisos, R.id.nav_cuentas //agregando nav_cuentas
+               R.id.nav_home, R.id.nav_avisos, R.id.nav_cuentas //agregando nav_cuentas
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -78,6 +61,11 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
+
+
+
+
+
 }
 
 
