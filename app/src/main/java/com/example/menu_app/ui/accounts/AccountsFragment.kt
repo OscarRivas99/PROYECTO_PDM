@@ -47,7 +47,7 @@ class AccountsFragment : Fragment() {
         btn.setOnClickListener {
 
             val dialog = AlertDialog.Builder(requireActivity())
-            dialog.setTitle("Add New Account")
+            dialog.setTitle("Añadir nueva cuenta")
             val view = layoutInflater.inflate(R.layout.dialog_dashboard_accounts, null)
 
             val nombre = view.findViewById<EditText>(R.id.editText_nombre)
@@ -163,8 +163,8 @@ class AccountsFragment : Fragment() {
 
             holder.eliminar.setOnClickListener {
                 val dialog = AlertDialog.Builder(fragment.requireContext())
-                dialog.setTitle("Are you sure")
-                dialog.setMessage("Do you want to delete this account ?")
+                dialog.setTitle("Aviso")
+                dialog.setMessage("¿Desea eliminar esta cuenta?")
                 dialog.setPositiveButton("Continue") { _: DialogInterface, _: Int ->
                     fragment.dbHandler.deleteAccounts(list[p1].id)
                     fragment.refreshList()

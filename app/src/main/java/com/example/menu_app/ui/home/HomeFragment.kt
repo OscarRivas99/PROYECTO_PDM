@@ -63,7 +63,6 @@ class HomeFragment : Fragment() {
 
                 val categoria = view.findViewById<TextView>(R.id.tv_show_categorie)
                 val datebutton = view.findViewById<Button>(R.id.show_datepicker_button)
-                val btns = view.findViewById<Button>(R.id.send_mount_button)
                 val showdate = view.findViewById<TextView>(R.id.fecha)
                 val monto = view.findViewById<EditText>(R.id.et_mount)
                 val descripcion = view.findViewById<EditText>(R.id.notes)
@@ -132,14 +131,7 @@ class HomeFragment : Fragment() {
                 }
 
 
-                btns.setOnClickListener {
-                    Toast.makeText(
-                        context,
-                        "Mount: $${monto.text.toString() + " Fecha: ${showdate.text}" + " Description: ${descripcion.text}" + " Categoria: ${categoria.text}"}",
-                        Toast.LENGTH_SHORT
-                    ).show()
 
-                }
                 //show_count()
 
                 btnCategoria.setOnClickListener {
@@ -232,9 +224,9 @@ class HomeFragment : Fragment() {
 
 
     override fun onResume() {
-          refreshList()
+        refreshList()
         super.onResume()
-      }
+    }
 
 
 
@@ -253,13 +245,13 @@ class HomeFragment : Fragment() {
 
         val categoria = view.findViewById<TextView>(R.id.tv_show_categorie)
         val datebutton = view.findViewById<Button>(R.id.show_datepicker_button)
-        val btns = view.findViewById<Button>(R.id.send_mount_button)
+
         val showdate = view.findViewById<TextView>(R.id.fecha)
         val monto = view.findViewById<EditText>(R.id.et_mount)
         val descripcion = view.findViewById<EditText>(R.id.notes)
         val btnCategoria = view.findViewById<Button>(R.id.button_categoria)
 
-         categoria.setText(movement.categoria)
+        categoria.setText(movement.categoria)
         showdate.setText(movement.date)
         monto.setText(movement.monto)
         descripcion.setText(movement.descripcion)
@@ -296,10 +288,7 @@ class HomeFragment : Fragment() {
 
 
         //spiner fin
-        btns.setOnClickListener {
-            Toast.makeText(context, "Mount: $${monto.text.toString() + "Fecha: ${showdate .text}" + " Description: ${descripcion.text}" + " Categoria: ${categoria.text}"}", Toast.LENGTH_SHORT).show()
 
-        }
         btnCategoria.setOnClickListener {
             val builder = AlertDialog.Builder(requireActivity())
             builder.setTitle("   Escoge una categoria")
@@ -358,24 +347,24 @@ class HomeFragment : Fragment() {
     private fun show_count() {
 
 
-       /* var cuentas = dbHandler.GetAllCount()
-        val spinner = requireActivity().spinner_accounts
-        val cuentas2 = cuentas.toTypedArray()
-        val arrayAdapter = ArrayAdapter(requireContext(),android.R.layout.simple_spinner_item, cuentas2)
-        spinner.adapter = arrayAdapter
-        spinner.onItemSelectedListener = object :    AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-                TODO("Not yet implemented")
+        /* var cuentas = dbHandler.GetAllCount()
+         val spinner = requireActivity().spinner_accounts
+         val cuentas2 = cuentas.toTypedArray()
+         val arrayAdapter = ArrayAdapter(requireContext(),android.R.layout.simple_spinner_item, cuentas2)
+         spinner.adapter = arrayAdapter
+         spinner.onItemSelectedListener = object :    AdapterView.OnItemSelectedListener {
+             override fun onNothingSelected(parent: AdapterView<*>?) {
+                 TODO("Not yet implemented")
 
-            }
+             }
 
-            override fun onItemSelected(
-                parent: AdapterView<*>,
-                view: View,
-                position: Int,
-                id: Long
-            ) {}
-        }*/
+             override fun onItemSelected(
+                 parent: AdapterView<*>,
+                 view: View,
+                 position: Int,
+                 id: Long
+             ) {}
+         }*/
     }
 
 
@@ -385,7 +374,7 @@ class HomeFragment : Fragment() {
 
 
 
- //desde aqui
+    //desde aqui
     class DashboardAdapter(val fragment: HomeFragment, val list: MutableList<Movement>) :
         RecyclerView.Adapter<DashboardAdapter.ViewHolder>() {
         override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
@@ -456,7 +445,7 @@ class HomeFragment : Fragment() {
         }
 
 
-     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
+        class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
             val categoria: TextView = v.findViewById(R.id.tv_categoria)
             val monto: TextView = v.findViewById(R.id.tv_monto)
             val fecha: TextView = v.findViewById(R.id.tv_fecha)
@@ -464,14 +453,11 @@ class HomeFragment : Fragment() {
             val menu: ImageView = v.findViewById(R.id.iv_menu)
             val nombre_cuenta: TextView = v.findViewById(R.id.tv_nombre_cuenta)
         }
-     private fun show_count(){
+        private fun show_count(){
         }
 
 
- }
+    }
 
 
 }
-/////
-
-

@@ -18,14 +18,14 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.362" />
+            app:layout_constraintTop_toBottomOf="@+id/txt_usuario"
+            app:layout_constraintVertical_bias="0.0" />
 
         <Button
             android:id="@+id/btn_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="64dp"
+            android:layout_marginBottom="30dp"
             android:background="@drawable/bg_aqua"
             android:clickable="true"
             android:text="Editar"
@@ -34,10 +34,9 @@
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_contraseña"
-            app:layout_constraintVertical_bias="0.645" />
+            app:layout_constraintTop_toBottomOf="@+id/txt_contrasenia"
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/txt_perfil"
@@ -50,28 +49,27 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.07" />
+            app:layout_constraintVertical_bias="0.01999998" />
 
         <TextView
             android:id="@+id/txt_usuario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
             android:text="Usuario:"
             android:textSize="23sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/txt_nombreUsuario"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
 
         <TextView
             android:id="@+id/txt_contraseña"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="340dp"
+            android:layout_marginTop="84dp"
             android:text="Contraseña:"
             android:textSize="23sp"
             android:textStyle="bold"
@@ -79,7 +77,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/txt_nombreUsuario" />
 
         <TextView
             android:id="@+id/txt_contrasenia"
@@ -88,18 +86,16 @@
             android:ems="10"
             android:inputType="textPassword"
             android:textSize="30dp"
-            app:layout_constraintBottom_toTopOf="@+id/btn_add"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.769" />
+            app:layout_constraintTop_toBottomOf="@+id/txt_contraseña" />
 
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="97dp"
             android:layout_height="88dp"
-            android:layout_marginTop="36dp"
-            android:src="@drawable/round_account_circle_black_24dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/baseline_account_circle_black_48"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_perfil" />

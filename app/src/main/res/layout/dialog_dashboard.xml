@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#ffffff"
         >
+
+
+
 
         <TextView
             android:id="@+id/label_money"
@@ -101,61 +107,44 @@
         app:layout_constraintTop_toBottomOf="@+id/notes"
         app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/label_categories"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="172dp"
-        android:text="Categoria: "
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/notes" />
+        <TextView
+            android:id="@+id/label_categories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="172dp"
+            android:text="Categoria: "
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/notes" />
 
-    <Button
-        android:id="@+id/button_categoria"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/bg_aqua"
-        android:text="Elige una categoria"
-        android:textAllCaps="false"
-        android:textColor="#058D8D"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.536"
-        app:layout_constraintStart_toEndOf="@+id/send_mount_button"
-        app:layout_constraintTop_toBottomOf="@+id/tv_show_categorie" />
+        <Button
+            android:id="@+id/button_categoria"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="160dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/bg_aqua"
+            android:text="Elige una categoria"
+            android:textAllCaps="false"
+            android:textColor="#058D8D"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/notes" />
 
-    <TextView
-        android:id="@+id/tv_show_categorie"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="172dp"
-        android:text="categoria"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.692"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/notes" />
+        <TextView
+            android:id="@+id/tv_show_categorie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="172dp"
+            android:text="categoria"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.472"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/notes" />
 
-    <Button
-        android:id="@+id/send_mount_button"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/bg_aqua"
-        android:text="Mostrar Datos"
-        android:textAllCaps="false"
-        android:textColor="#058D8D"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/label_categories" />
-
-    <Switch
+        <Switch
         android:id="@+id/tipo_movimiento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -167,23 +156,29 @@
         app:layout_constraintTop_toBottomOf="@+id/spn_count"
         app:layout_constraintVertical_bias="0.555" />
 
-    <TextView
-        android:id="@+id/txt_egres"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:text="Egreso"
-        android:textColor="#000000"
-        app:layout_constraintBottom_toTopOf="@+id/tv_show_categorie"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.468"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spn_count"
-        app:layout_constraintVertical_bias="0.0"
-        app:textAllCaps="false" />
+        <TextView
+            android:id="@+id/txt_egres"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="25dp"
+            android:text="Egreso"
+            android:textColor="#000000"
+            app:layout_constraintBottom_toTopOf="@+id/tv_show_categorie"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.468"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spn_count"
+            app:layout_constraintVertical_bias="0.0"
+            app:textAllCaps="false" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
+</layout>
 
 <!--
 <RelativeLayout
