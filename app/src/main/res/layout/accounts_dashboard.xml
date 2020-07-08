@@ -11,9 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_toStartOf="@+id/iv_menu"
-        android:layout_toLeftOf="@id/iv_menu"
-        android:background="#C8C9C9"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+
+
+        android:background="#FBD86D"
         android:padding="16dp"
         android:text="sfsdf"
         android:textStyle="bold" />
@@ -23,10 +25,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:layout_marginBottom="8dp"
-        android:layout_toStartOf="@+id/iv_menu"
-        android:layout_toLeftOf="@id/iv_menu"
-        android:background="#C8C9C9"
+
+
+        android:background="#FBD86D"
         android:padding="16dp"
         android:paddingLeft="16dp"
         android:paddingTop="30dp"
@@ -38,10 +42,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:layout_marginBottom="8dp"
-        android:layout_toStartOf="@+id/iv_menu"
-        android:layout_toLeftOf="@id/iv_menu"
-        android:background="#C8C9C9"
+
+
+        android:background="#FBD86D"
         android:padding="16dp"
         android:paddingLeft="16dp"
         android:paddingTop="30dp"
@@ -56,7 +62,9 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginTop="8dp"
-        android:background="#C8C9C9"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:background="#FBD86D"
         android:padding="8dp"
         android:src="@drawable/basurero" />
 

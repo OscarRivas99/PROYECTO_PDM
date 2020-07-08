@@ -34,25 +34,12 @@
 
 
 
-    <fragment
-        android:id="@+id/nav_metodos"
-        android:name="com.example.menu_app.ui.slideshow.MetodosFragment"
-        android:label="@string/menu_metodos"
-        tools:layout="@layout/fragment_metodos" >
 
-        <argument
-            android:name="categoria"
-            app:argType="string"
-            android:defaultValue="----categoria----" />
-        <action
-            android:id="@+id/action_nav_metodos_to_nav_home"
-            app:destination="@id/nav_home" />
-    </fragment>
 
     <fragment
         android:id="@+id/nav_avisos"
         android:name="com.example.menu_app.ui.avisos.AvisosFragments"
-        android:label="Alertas"
+        android:label="Avisos"
         tools:layout="@layout/fragment_avisos" />
     <fragment
         android:id="@+id/perfil"

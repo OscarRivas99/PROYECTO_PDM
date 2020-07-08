@@ -27,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="Bill Money App"
+        android:text="Bill Wallet App"
         android:textSize="25sp"
         android:textStyle="bold"
         app:fontFamily="@font/andika" />
