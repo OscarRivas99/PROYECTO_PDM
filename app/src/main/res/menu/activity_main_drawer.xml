@@ -8,19 +8,19 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_icon"
-            android:title="@string/menu_home" />
+            android:title="Movimientos" />
 
         <item
             android:id="@+id/nav_cuentas"
             android:icon="@drawable/baseline_monetization_on_black_24dp"
-            android:title="Accounts"
+            android:title="Cuentas"
             />
 
 
         <item
             android:id="@+id/nav_avisos"
             android:icon="@drawable/ic_alert"
-            android:title="@string/Avisos" />
+            android:title="Alertas" />
         <item
             android:id="@+id/perfil"
             android:icon="@drawable/round_account_circle_black_24dp"
