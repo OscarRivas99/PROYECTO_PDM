@@ -57,7 +57,7 @@ class registro : AppCompatActivity() {
 
                 finish()
 
-                //   android.os.Process.killProcess(android.os.Process.myPid())
+                   android.os.Process.killProcess(android.os.Process.myPid())
 
             }
             dialog.setNegativeButton("Cancel") { _: DialogInterface, _: Int ->

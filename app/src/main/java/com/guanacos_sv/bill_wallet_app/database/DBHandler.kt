@@ -263,7 +263,22 @@ fun val_user():Boolean{
         db.rawQuery(ubdate_monto,null)
         db.execSQL(ubdate_monto)
     }
+// get saldo unico
+fun GetSaldo (nombreCuenta: String): String {
+    var result: String = ""
+    val db = readableDatabase
+    val queryResult = db.rawQuery("SELECT $COL_SALDO from $ACCOUNTS_TABLE  WHERE $COL_NOMBRE = '$nombreCuenta'" , null)
+    if (queryResult.moveToFirst()) {
+        do {
+            val counts = Accounts()
+            counts.saldo = queryResult.getString(queryResult.getColumnIndex(COL_SALDO))
 
+            result = counts.saldo.toString()
+        } while (queryResult.moveToNext())
+    }
+    queryResult.close()
+    return result
+}
 
 
 }

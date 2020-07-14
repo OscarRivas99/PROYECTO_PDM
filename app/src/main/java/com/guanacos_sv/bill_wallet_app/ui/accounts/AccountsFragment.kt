@@ -105,9 +105,13 @@ class AccountsFragment : Fragment() {
                     accounts.cuenta = valor_cuenta
                     accounts.saldo = saldo.text.toString()
 
+                    if(accounts.saldo.toInt() < 0 ){
+                        Toast.makeText(context, "No se permiten saldos negativos" , Toast.LENGTH_LONG).show()
+                    }else {
 
-                    dbHandler.addAccounts(accounts)
-                    refreshList()
+                        dbHandler.addAccounts(accounts)
+                        refreshList()
+                    }
                 }
             }
             dialog.setNegativeButton("Cancel") { _: DialogInterface, _: Int ->

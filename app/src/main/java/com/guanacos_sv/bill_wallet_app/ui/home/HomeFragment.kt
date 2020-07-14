@@ -194,9 +194,23 @@ class HomeFragment : Fragment() {
                         val tipo_movimiento1 = view.findViewById<Switch>(R.id.tipo_movimiento)
                         val switchState: Boolean = tipo_movimiento1.isChecked()
                         if (switchState) {
-                            dbHandler.egreso(movement.monto, movement.nombre_cuenta)
+                            if(dbHandler.GetSaldo(movement.nombre_cuenta).toInt() < movement.monto.toInt()){
+                                Toast.makeText(context!!, "Ha alcanzado su limite de saldo disponible", Toast.LENGTH_SHORT).show()
+                                dbHandler.egreso(movement.monto, movement.nombre_cuenta)
+                                Toast.makeText(
+                                    context!!,
+                                    "Estado de Cuenta: " + nombre_cuenta + "  Saldo Actual: $ " +  dbHandler.GetSaldo(nombre_cuenta).toString(),
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            }
+
                         } else {
                             dbHandler.ingreso(movement.monto, movement.nombre_cuenta)
+                            Toast.makeText(
+                                context!!,
+                                "Estado de Cuenta: " + nombre_cuenta + "  Saldo Actual: $ " +  dbHandler.GetSaldo(nombre_cuenta).toString(),
+                                Toast.LENGTH_LONG
+                            ).show()
                         }
                         //termina ingrso
                         refreshList()
@@ -252,7 +266,36 @@ class HomeFragment : Fragment() {
         showdate.setText(movement.date)
         monto.setText(movement.monto)
         descripcion.setText(movement.descripcion)
+        val cuenta = view.findViewById<Spinner>(R.id.spn_count)
 
+        val cuentas1 = dbHandler.GetAllCount()
+        val cuentas2 = cuentas1.toTypedArray()
+        val arrayAdapter =
+            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, cuentas2)
+        cuenta.adapter = arrayAdapter
+        ////////////////////////////////////////////////////////////////////////
+        cuenta.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                Toast.makeText(context!!, "onNothingSelected", Toast.LENGTH_SHORT).show()
+            }
+
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                if (!banderaListener) {  //Se agrega esta bandera ya que el listener puede ser invocado cuando se crea el fragmento
+                    banderaListener = true
+
+                }
+                // A partir de acá, podemos asumir que la llamada es genuina y generada por el usuario
+
+                nombre_cuenta = cuenta.getItemAtPosition(position).toString()
+
+            }
+        }
         dialog.setView(view)
 
         datebutton.setOnClickListener {
@@ -330,7 +373,27 @@ class HomeFragment : Fragment() {
                 movement.nombre_cuenta = nombre_cuenta
 
                 dbHandler.updateMovement(movement)
+                val tipo_movimiento1 = view.findViewById<Switch>(R.id.tipo_movimiento)
+                val switchState: Boolean = tipo_movimiento1.isChecked()
+                if (switchState) {
+                    if(dbHandler.GetSaldo(movement.nombre_cuenta).toInt() < movement.monto.toInt()){
+                        Toast.makeText(context!!, "Ha alcanzado su limite de saldo disponible", Toast.LENGTH_SHORT).show()
+                        dbHandler.egreso(movement.monto, movement.nombre_cuenta)
+                        Toast.makeText(
+                            context!!,
+                            "Estado de Cuenta: " + nombre_cuenta + "  Saldo Actual: $  " +  dbHandler.GetSaldo(nombre_cuenta).toString(),
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
 
+                } else {
+                    dbHandler.ingreso(movement.monto, movement.nombre_cuenta)
+                    Toast.makeText(
+                        context!!,
+                        "Estado de Cuenta: " + nombre_cuenta + "  Saldo Actual: $  " +  dbHandler.GetSaldo(nombre_cuenta).toString(),
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
                 refreshList()
 
             }
