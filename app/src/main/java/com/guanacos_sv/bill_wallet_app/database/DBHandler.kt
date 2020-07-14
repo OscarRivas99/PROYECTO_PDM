@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper
 import com.guanacos_sv.bill_wallet_app.Classes.Accounts
 import com.guanacos_sv.bill_wallet_app.Classes.Movement
 import com.guanacos_sv.bill_wallet_app.Classes.User
-
+import com.guanacos_sv.bill_wallet_app.Classes.Avisos
 
 class DBHandler(val context: Context) : SQLiteOpenHelper(context, DB_NAME, null, DB_VERSION) {
     override fun onCreate(db: SQLiteDatabase) {
@@ -30,12 +30,19 @@ class DBHandler(val context: Context) : SQLiteOpenHelper(context, DB_NAME, null,
                 "$COL_ID_ACCOUNT integer PRIMARY KEY AUTOINCREMENT," +
                 "$COL_NOMBRE varchar," +
                 "$COL_CUENTAS varchar,"+
-                "$COL_SALDO varchar);"+
+                "$COL_SALDO varchar);"
+
+
+        val createAvisosMoneyApp = "CREATE TABLE $AVISOS_TABLE ( " +
+                "$COL_ID_AVISOS integer PRIMARY KEY AUTOINCREMENT," +
+                "$COL_RECORDATORIO varchar,"+
+                "$COL_FECHA varchar);"
+
 
         db.execSQL(createMoneyAppTable)
         db.execSQL(createUserMoneyApp)
         db.execSQL(createAccountsMoneyApp)
-
+        db.execSQL(createAvisosMoneyApp)
 
     }
 
@@ -76,6 +83,21 @@ return result != (-1).toLong()
         val result =db.insert(ACCOUNTS_TABLE, null, cv)
         return result !=(-1).toLong()
     }
+
+
+    //Agregando Avisos
+    fun addAvisos(avisos: Avisos):Boolean{
+        val db = writableDatabase
+        val cv = ContentValues()
+        cv.put(COL_RECORDATORIO, avisos.recordatorio)
+        cv.put(COL_FECHA, avisos.fecha)
+        val result =db.insert(AVISOS_TABLE, null, cv)
+        return result !=(-1).toLong()
+    }
+
+
+
+
 
 fun val_user():Boolean{
     var count = 0
@@ -230,6 +252,12 @@ fun val_user():Boolean{
         db.delete(ACCOUNTS_TABLE, "$COL_ID=?", arrayOf(AccountId.toString()))
     }
 
+    fun deleteAvisos(AvisosId: Long){
+        val db = writableDatabase
+        db.delete(AVISOS_TABLE, "$COL_ID_AVISOS=?", arrayOf(AvisosId.toString()))
+    }
+
+
     fun getAccounts(): MutableList<Accounts> {
         val result: MutableList<Accounts> = ArrayList()
         val db = readableDatabase
@@ -250,6 +278,31 @@ fun val_user():Boolean{
         queryResult.close()
         return result
     }
+
+
+    //Consultas Avisos
+
+    fun getAvisos(): MutableList<Avisos> {
+        val result: MutableList<Avisos> = ArrayList()
+        val db = readableDatabase
+        val queryResult = db.rawQuery("SELECT * from $AVISOS_TABLE", null)
+        if (queryResult.moveToFirst()) {
+            do {
+                val avisos = Avisos()
+                avisos.id = queryResult.getLong(queryResult.getColumnIndex(COL_ID_AVISOS))
+                avisos.recordatorio = queryResult.getString(queryResult.getColumnIndex(COL_RECORDATORIO))
+                avisos.fecha = queryResult.getString(queryResult.getColumnIndex(COL_FECHA))
+
+                result.add(avisos)
+
+            } while (queryResult.moveToNext())
+        }
+        queryResult.close()
+        return result
+    }
+
+
+
 
       fun ingreso(monto: String, nombreCuenta: String) {
        val db = writableDatabase
