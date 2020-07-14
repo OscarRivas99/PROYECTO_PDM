@@ -14,13 +14,11 @@
         >
 
 
-
-
         <TextView
             android:id="@+id/label_money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/big_wide"
+            android:layout_marginTop="20dp"
             android:text="@string/txt_dgM_ingresar_datos_de_movimiento"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textSize="18sp"

@@ -186,7 +186,7 @@ class AvisosFragments : Fragment(){
             holder.fecha.text = list[p1].fecha
 
             holder.recordatorio.text = "Recordatorio: " + holder.recordatorio.text
-            holder.fecha.text = "Fecha: " + holder.fecha.text
+            holder.fecha.text = holder.fecha.text
 
 
 
