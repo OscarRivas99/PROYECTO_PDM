@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    >
 
 <ScrollView
     android:layout_width="match_parent"
@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
 
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="#ffffff"
         >
 
@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/big_wide"
-            android:text="Ingresar datos de movimiento"
+            android:text="@string/txt_dgM_ingresar_datos_de_movimiento"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -29,17 +29,31 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
+        <TextView
+            android:id="@+id/label_money2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="308dp"
+            android:text="Seleccione una cuenta"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textSize="18sp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
         android:id="@+id/et_mount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:ems="10"
+        android:textSize="20sp"
         android:gravity="center_horizontal"
-        android:hint="Ingresar monto (en $)"
+        android:hint="@string/hint_ingresar_monto_en"
         android:inputType="numberDecimal"
         android:textAlignment="center"
-        android:textColor="@color/cardview_dark_background"
+        android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/label_money" />
@@ -56,7 +70,7 @@
             android:layout_marginRight="24dp"
             android:background="@drawable/bg_pink"
             android:shadowColor="#FFFFFF"
-            android:text="Seleccionar fecha"
+            android:text="@string/txt_btn_seleccionar_fecha"
             android:textAllCaps="false"
             android:textColor="#ffffff"
             android:textSize="12sp"
@@ -85,8 +99,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:ems="10"
+        android:textSize="20sp"
         android:gravity="center_horizontal"
-        android:hint="Añadir descripción"
+        android:hint="@string/txt_dg_moves_a_adir_descripci_n"
+        android:textColor="#000000"
         android:inputType="textMultiLine"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
@@ -94,18 +110,17 @@
         app:layout_constraintTop_toBottomOf="@+id/show_datepicker_button" />
 
 
-    <Spinner
-        android:id="@+id/spn_count"
-        android:layout_width="289dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginBottom="80dp"
-        app:layout_constraintBottom_toTopOf="@+id/tv_show_categorie"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.475"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/notes"
-        app:layout_constraintVertical_bias="0.0" />
+        <Spinner
+            android:id="@+id/spn_count"
+            android:layout_width="289dp"
+            android:layout_height="49dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginBottom="80dp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_show_categorie"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/notes"
+            app:layout_constraintVertical_bias="0.833" />
 
         <TextView
             android:id="@+id/label_categories"
@@ -114,7 +129,8 @@
             android:layout_marginStart="30dp"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="172dp"
-            android:text="Categoria: "
+            android:textStyle="bold"
+            android:text="@string/txt_categoria"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/notes" />
 
@@ -126,7 +142,7 @@
             android:layout_marginEnd="30dp"
             android:layout_marginRight="30dp"
             android:background="@drawable/bg_aqua"
-            android:text="Elige una categoria"
+            android:text="@string/txt_elige_una_categoria"
             android:textAllCaps="false"
             android:textColor="#058D8D"
             android:textSize="18sp"
@@ -138,109 +154,43 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="172dp"
-            android:text="categoria"
+
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.472"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/notes" />
 
         <Switch
-        android:id="@+id/tipo_movimiento"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ingreso"
-        app:layout_constraintBottom_toTopOf="@+id/label_categories"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.224"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spn_count"
-        app:layout_constraintVertical_bias="0.555" />
+            android:id="@+id/tipo_movimiento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_ingreso"
+            app:layout_constraintBottom_toTopOf="@+id/label_categories"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.404"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spn_count"
+            app:layout_constraintVertical_bias="0.48" />
 
         <TextView
             android:id="@+id/txt_egres"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
             android:layout_marginTop="25dp"
-            android:text="Egreso"
+            android:text="@string/txt_egreso"
             android:textColor="#000000"
             app:layout_constraintBottom_toTopOf="@+id/tv_show_categorie"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.468"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.13"
+            app:layout_constraintStart_toEndOf="@+id/tipo_movimiento"
             app:layout_constraintTop_toBottomOf="@+id/spn_count"
-            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintVertical_bias="0.060000002"
             app:textAllCaps="false" />
 
 
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
 </layout>
 
-<!--
-<RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp">
 
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="ingrese categoria"/>
-
-    <EditText
-            android:id="@+id/et_categoria"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    <TextView
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="64dp"
-            android:text="ingrese monto"/>
-
-    <EditText
-            android:id="@+id/et_monto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/et_categoria"
-            android:paddingTop="60dp" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/et_monto"
-
-        android:text="ingrese fecha"/>
-
-    <EditText
-        android:id="@+id/et_fecha"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/et_monto"
-        />
-
-    <TextView
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/et_fecha"
-
-        android:text="ingrese descripcion"/>
-
-    <EditText
-        android:id="@+id/et_descripcion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/et_fecha"
-        android:layout_marginTop="20dp" />
-
-
-
-
-
-</RelativeLayout>-->

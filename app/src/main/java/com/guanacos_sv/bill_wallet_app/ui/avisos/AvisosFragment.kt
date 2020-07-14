@@ -116,7 +116,7 @@ class AvisosFragments : Fragment(){
                     val random = (Math.random() * 50 + 1).toInt()
                     val aviso = txt_recordatorio.text.toString()
 
-                    Toast.makeText(context, airtime.toString(), Toast.LENGTH_LONG).show()
+
                     val data = enviarData("Notificación Bill Wallet App", aviso, random)
                     Worknoti.Guardarnoti(airtime, data, tag)
                     //}

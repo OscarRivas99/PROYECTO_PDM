@@ -160,9 +160,21 @@ class AccountsFragment : Fragment() {
             holder.nombre.text = list[p1].nombre
             holder.cuenta.text = list[p1].cuenta
             holder.saldo.text = list[p1].saldo
-            holder.nombre.text = "Nombre de la cuenta: " + holder.nombre.text
+            holder.nombre.text = "Nombre: " + holder.nombre.text
+
+            holder.saldo.text = "Saldo actual (en $) : " + holder.saldo.text
+
+
+            when(holder.cuenta.text.toString()){
+                "Efectivo" -> holder.img.setImageResource(R.drawable.moneyflat)
+                "Débito"-> holder.img.setImageResource(R.drawable.shopper)
+                "Crédito"-> holder.img.setImageResource(R.drawable.shopper)
+
+                else -> {
+
+                }
+            }
             holder.cuenta.text = "Tipo de cuenta: " + holder.cuenta.text
-            holder.saldo.text = "Saldo Inicial: " + holder.saldo.text
 
 
             holder.eliminar.setOnClickListener {
@@ -180,6 +192,7 @@ class AccountsFragment : Fragment() {
             }
         }
             class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
+                val img : ImageView = v.findViewById(R.id.img_cuenta)
                 val nombre: TextView = v.findViewById(R.id.tv_nombre)
                 val cuenta: TextView = v.findViewById(R.id.tv_cuenta)
                 val saldo: TextView = v.findViewById(R.id.tv_saldo)

@@ -9,7 +9,7 @@
     <TextView
         android:id="@+id/tv_categoria"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="52dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="18dp"
 
@@ -24,7 +24,7 @@
     <TextView
         android:id="@+id/tv_nombre_cuenta"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="52dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="69dp"
         android:layout_marginBottom="8dp"
@@ -40,9 +40,9 @@
     <TextView
         android:id="@+id/tv_fecha"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
+        android:layout_height="50dp"
         android:layout_marginLeft="16dp"
+        android:layout_marginTop="120dp"
         android:layout_marginBottom="8dp"
         android:layout_toStartOf="@+id/iv_menu"
         android:layout_toLeftOf="@id/iv_menu"
@@ -51,17 +51,16 @@
         android:paddingLeft="16dp"
         android:paddingTop="30dp"
         android:text="dsfgg"
-        android:textStyle="bold"
-        />
+        android:textStyle="bold" />
 
 
     <TextView
         android:id="@+id/tv_descripcion"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="170dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginLeft="16dp"
         android:layout_toStartOf="@+id/iv_menu"
         android:layout_toLeftOf="@id/iv_menu"
         android:background="#FBD86D"
@@ -69,32 +68,27 @@
         android:paddingLeft="16dp"
         android:paddingTop="30dp"
         android:text="dsfgg"
-        android:textStyle="bold"
-        />
+        android:textStyle="bold" />
 
 
     <TextView
         android:id="@+id/tv_monto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="160dp"
-        android:layout_marginEnd="45dp"
-        android:layout_marginRight="45dp"
+        android:layout_below="@+id/img_categoria"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="22dp"
         android:layout_marginBottom="8dp"
         android:layout_toStartOf="@+id/iv_menu"
         android:layout_toLeftOf="@id/iv_menu"
         android:background="#FBD86D"
-        android:padding="16dp"
-        android:paddingLeft="16dp"
-        android:paddingTop="30dp"
         android:text="nombre_cuenta"
         android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/iv_menu"
         android:layout_width="46dp"
-        android:layout_height="203dp"
+        android:layout_height="202dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginTop="18dp"
@@ -104,14 +98,17 @@
         android:padding="8dp"
         android:src="@drawable/baseline_more_vert_black_36dp" />
 
+
     <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="126dp"
-        android:layout_height="123dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginRight="35dp"
-        android:layout_toLeftOf="@id/iv_menu"
-        android:src="@drawable/burger"
-         />
+        android:id="@+id/img_categoria"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignTop="@+id/tv_categoria"
+        android:layout_alignEnd="@+id/tv_categoria"
+        android:layout_alignRight="@+id/tv_categoria"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="269dp"
+        />
 
 </RelativeLayout>

@@ -8,7 +8,7 @@
 
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="400dp"
         tools:context=".ui.avisos.AvisosFragments">
 
 
@@ -16,45 +16,41 @@
             android:id="@+id/txt_recordatorio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
             android:ems="10"
             android:gravity="center"
+            android:hint="Ingresar recordatorio"
             android:inputType="textPersonName"
             android:textSize="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.491"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.329" />
-
-
-
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/btn_fecha"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
             android:text="@string/date"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_recordatorio"
-            app:layout_constraintVertical_bias="0.102" />
+            app:layout_constraintTop_toBottomOf="@+id/txt_selec_fecha"
+            app:layout_constraintVertical_bias="0.13999999" />
 
         <TextView
-            android:id="@+id/msg"
+            android:id="@+id/txt_selec_fecha"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ingrese su categoria"
-            android:textSize="30dp"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="50dp"
+            android:text="Seleccione el dia del aviso"
+            android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.562" />
+            app:layout_constraintTop_toBottomOf="@+id/txt_recordatorio" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

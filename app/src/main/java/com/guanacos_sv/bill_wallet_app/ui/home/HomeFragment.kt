@@ -55,7 +55,7 @@ class HomeFragment : Fragment() {
             btn.setOnClickListener {
 
                 val dialog = AlertDialog.Builder(requireActivity())
-                dialog.setTitle("Add Movement")
+                dialog.setTitle("Añadir Movimiento")
                 val view = layoutInflater.inflate(R.layout.dialog_dashboard, null)
 
                 val categoria = view.findViewById<TextView>(R.id.tv_show_categorie)
@@ -460,14 +460,28 @@ class HomeFragment : Fragment() {
             holder.fecha.text = list[p1].date
             holder.descripcion.text = list[p1].descripcion
             holder.nombre_cuenta.text = list[p1].nombre_cuenta
-            holder.categoria.text = "Categoria: " + holder.categoria.text
-            holder.monto.text = "Monto: " + holder.monto.text
-            holder.fecha.text = "Fecha: " + holder.fecha.text
+
+            holder.monto.text = "Monto (en $): " + holder.monto.text
+            holder.fecha.text = holder.fecha.text
             holder.descripcion.text = "Descripcion: " + holder.descripcion.text
             holder.nombre_cuenta.text = "Cuenta: " + holder.nombre_cuenta.text
 
 
+            when(holder.categoria.text.toString()){
+                "Comida" -> holder.imagen.setImageResource(R.drawable.burger)
+                "Transporte"-> holder.imagen.setImageResource(R.drawable.cars)
+                "Entretenimiento" -> holder.imagen.setImageResource(R.drawable.cinema)
+                "Salud" -> holder.imagen.setImageResource(R.drawable.help)
+                "Mascota" -> holder.imagen.setImageResource(R.drawable.dog)
+                "Hogar" -> holder.imagen.setImageResource(R.drawable.cabin)
+                "Otro" -> holder.imagen.setImageResource(R.drawable.gym)
 
+
+                else -> {
+
+                }
+            }
+            holder.categoria.text = "Categoria: " + holder.categoria.text
 
 
 
@@ -484,13 +498,13 @@ class HomeFragment : Fragment() {
 
                         R.id.menu_delete -> {
                             val dialog = AlertDialog.Builder(fragment.requireContext())
-                            dialog.setTitle("Are you sure")
-                            dialog.setMessage("Do you want to delete this movement ?")
-                            dialog.setPositiveButton("Continue") { _: DialogInterface, _: Int ->
+                            dialog.setTitle("Esta seguro?")
+                            dialog.setMessage("Desea eliminar este movimiento ?")
+                            dialog.setPositiveButton("Continuar") { _: DialogInterface, _: Int ->
                                 fragment.dbHandler.deleteMovement(list[p1].id)
                                 fragment.refreshList()
                             }
-                            dialog.setNegativeButton("Cancel") { _: DialogInterface, _: Int ->
+                            dialog.setNegativeButton("Cancelar") { _: DialogInterface, _: Int ->
 
                             }
                             dialog.show()
@@ -506,6 +520,7 @@ class HomeFragment : Fragment() {
 
 
         class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
+            val imagen : ImageView = v.findViewById(R.id.img_categoria)
             val categoria: TextView = v.findViewById(R.id.tv_categoria)
             val monto: TextView = v.findViewById(R.id.tv_monto)
             val fecha: TextView = v.findViewById(R.id.tv_fecha)
