@@ -11,22 +11,20 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginTop="15dp"
         android:id="@+id/rv_dashboard"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_marginTop="15dp" />
 
-
-    <Button
+    <ImageView
         android:id="@+id/fab_dashboard"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_margin="16dp"
-        android:background="@drawable/ic_add_circle_black_100dp"
-        android:src="@drawable/icon_check"
+        android:layout_margin="23dp"
+        android:src="@drawable/plus"
         app:backgroundTint="#92ED5829" />
 
 
