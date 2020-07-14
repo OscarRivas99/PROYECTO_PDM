@@ -55,7 +55,7 @@
         android:layout_height="45dp"
         android:layout_marginStart="48dp"
         android:layout_marginLeft="48dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="68dp"
         android:src="@drawable/dinero"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image_cuentas" />
@@ -64,12 +64,12 @@
         android:id="@+id/editText_saldo"
 
 
-        android:inputType="numberDecimal"
-        android:layout_width="wrap_content"
-        android:layout_height="38dp"
+        android:layout_width="224dp"
+        android:layout_height="54dp"
         android:layout_marginTop="52dp"
         android:ems="10"
         android:hint="Saldo inicial"
+        android:inputType="numberDecimal"
         android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
