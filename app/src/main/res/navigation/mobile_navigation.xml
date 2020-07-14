@@ -63,5 +63,10 @@
         android:id="@+id/login2"
         android:name="com.guanacos_sv.bill_wallet_app.ui.login.login2"
         android:label="login2" />
+    <fragment
+        android:id="@+id/acercaDe"
+        android:name="com.guanacos_sv.bill_wallet_app.ui.AcercaDe.AcercaDe"
+        android:label="Acerca de "
+        tools:layout="@layout/fragment_acerca_de" />
 
 </navigation>
