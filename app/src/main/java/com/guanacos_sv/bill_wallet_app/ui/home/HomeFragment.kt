@@ -180,7 +180,7 @@ class HomeFragment : Fragment() {
                 }
 
                 dialog.setPositiveButton("Add") { _: DialogInterface, _: Int ->
-                    if (monto.text.isNotEmpty()) {
+                    if (monto.text.isNotEmpty() && categoria.text.isNotEmpty()) {
                         val movement = Movement()
                         movement.categoria = categoria.text.toString()
                         movement.date = showdate.text.toString()
@@ -194,8 +194,20 @@ class HomeFragment : Fragment() {
                         val tipo_movimiento1 = view.findViewById<Switch>(R.id.tipo_movimiento)
                         val switchState: Boolean = tipo_movimiento1.isChecked()
                         if (switchState) {
-                            if(dbHandler.GetSaldo(movement.nombre_cuenta).toInt() < movement.monto.toInt()){
-                                Toast.makeText(context!!, "Ha alcanzado su limite de saldo disponible", Toast.LENGTH_SHORT).show()
+                            if(dbHandler.GetSaldo(movement.nombre_cuenta).toInt() < movement.monto.toInt()) {
+                                Toast.makeText(
+                                    context!!,
+                                    "Ha alcanzado su limite de saldo disponible",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+
+                                dbHandler.egreso(movement.monto, movement.nombre_cuenta)
+                                Toast.makeText(
+                                    context!!,
+                                    "Estado de Cuenta: " + nombre_cuenta + "  Saldo Actual: $ " +  dbHandler.GetSaldo(nombre_cuenta).toString(),
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            }else {
                                 dbHandler.egreso(movement.monto, movement.nombre_cuenta)
                                 Toast.makeText(
                                     context!!,
@@ -216,7 +228,14 @@ class HomeFragment : Fragment() {
                         refreshList()
 
 
+                    }else{
+                        Toast.makeText(
+                            context!!,
+                            "Complete todo los campos o agregue una categoria" ,
+                            Toast.LENGTH_LONG).show()
                     }
+
+
                 }
                 dialog.setNegativeButton("Cancel") { _: DialogInterface, _: Int ->
 
@@ -365,7 +384,7 @@ class HomeFragment : Fragment() {
 
         dialog.setPositiveButton("Update") { _: DialogInterface, _: Int ->
 
-            if (categoria.text.isNotEmpty() && showdate.text.isNotEmpty()) {
+            if (categoria.text.isNotEmpty() && showdate.text.isNotEmpty() && monto.text.isNotEmpty()) {
                 movement.categoria = categoria.text.toString()
                 movement.date = showdate.text.toString()
                 movement.monto = monto.text.toString()
@@ -376,12 +395,24 @@ class HomeFragment : Fragment() {
                 val tipo_movimiento1 = view.findViewById<Switch>(R.id.tipo_movimiento)
                 val switchState: Boolean = tipo_movimiento1.isChecked()
                 if (switchState) {
-                    if(dbHandler.GetSaldo(movement.nombre_cuenta).toInt() < movement.monto.toInt()){
-                        Toast.makeText(context!!, "Ha alcanzado su limite de saldo disponible", Toast.LENGTH_SHORT).show()
+                    if(dbHandler.GetSaldo(movement.nombre_cuenta).toInt() < movement.monto.toInt()) {
+                        Toast.makeText(
+                            context!!,
+                            "Ha alcanzado su limite de saldo disponible",
+                            Toast.LENGTH_SHORT
+                        ).show()
+
                         dbHandler.egreso(movement.monto, movement.nombre_cuenta)
                         Toast.makeText(
                             context!!,
-                            "Estado de Cuenta: " + nombre_cuenta + "  Saldo Actual: $  " +  dbHandler.GetSaldo(nombre_cuenta).toString(),
+                            "Estado de Cuenta: " + nombre_cuenta + "  Saldo Actual: $ " +  dbHandler.GetSaldo(nombre_cuenta).toString(),
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }else {
+                        dbHandler.egreso(movement.monto, movement.nombre_cuenta)
+                        Toast.makeText(
+                            context!!,
+                            "Estado de Cuenta: " + nombre_cuenta + "  Saldo Actual: $ " +  dbHandler.GetSaldo(nombre_cuenta).toString(),
                             Toast.LENGTH_LONG
                         ).show()
                     }
@@ -390,13 +421,22 @@ class HomeFragment : Fragment() {
                     dbHandler.ingreso(movement.monto, movement.nombre_cuenta)
                     Toast.makeText(
                         context!!,
-                        "Estado de Cuenta: " + nombre_cuenta + "  Saldo Actual: $  " +  dbHandler.GetSaldo(nombre_cuenta).toString(),
+                        "Estado de Cuenta: " + nombre_cuenta + "  Saldo Actual: $ " +  dbHandler.GetSaldo(nombre_cuenta).toString(),
                         Toast.LENGTH_LONG
                     ).show()
                 }
+                //termina ingrso
                 refreshList()
 
+
+            }else{
+                Toast.makeText(
+                    context!!,
+                    "Complete todo los campos o agregue una categoria" ,
+                    Toast.LENGTH_LONG).show()
             }
+
+
         }
         dialog.setNegativeButton("Cancel") { _: DialogInterface, _: Int ->
 
