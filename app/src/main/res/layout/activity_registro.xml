@@ -21,8 +21,8 @@
 
     <EditText
         android:id="@+id/txt_usuario_add"
-        android:layout_width="308dp"
-        android:layout_height="48dp"
+        android:layout_width="311dp"
+        android:layout_height="61dp"
         android:layout_marginTop="40dp"
         android:ems="10"
         android:hint="@string/hint_usuario"
@@ -35,8 +35,8 @@
 
     <EditText
         android:id="@+id/txt_pass_add"
-        android:layout_width="308dp"
-        android:layout_height="48dp"
+        android:layout_width="306dp"
+        android:layout_height="61dp"
         android:layout_marginTop="40dp"
         android:ems="10"
         android:hint="@string/hint_contrase_a"
