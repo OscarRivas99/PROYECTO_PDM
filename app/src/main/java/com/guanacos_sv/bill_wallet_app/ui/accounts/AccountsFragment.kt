@@ -174,7 +174,7 @@ class AccountsFragment : Fragment() {
 
                 }
             }
-            holder.cuenta.text = "Tipo de cuenta: " + holder.cuenta.text
+            holder.cuenta.text = "Cuenta: " + holder.cuenta.text
 
 
             holder.eliminar.setOnClickListener {
