@@ -514,7 +514,7 @@ class HomeFragment : Fragment() {
                 "Salud" -> holder.imagen.setImageResource(R.drawable.help)
                 "Mascota" -> holder.imagen.setImageResource(R.drawable.dog)
                 "Hogar" -> holder.imagen.setImageResource(R.drawable.cabin)
-                "Otro" -> holder.imagen.setImageResource(R.drawable.gym)
+                "Otro" -> holder.imagen.setImageResource(R.drawable.copyright)
 
 
                 else -> {

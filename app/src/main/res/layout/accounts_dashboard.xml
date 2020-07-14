@@ -9,62 +9,62 @@
     <TextView
         android:id="@+id/tv_nombre"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_height="54dp"
         android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginRight="16dp"
-
-
-        android:background="#FBD86D"
+        android:background="#77D8D8"
         android:padding="16dp"
         android:text="sfsdf"
-        android:textStyle="bold" />
+        android:textSize="20sp"
+        app:fontFamily="@font/acme" />
 
     <TextView
         android:id="@+id/tv_cuenta"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_height="59dp"
         android:layout_marginLeft="16dp"
+        android:layout_marginTop="50dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="8dp"
-
-
-        android:background="#FBD86D"
+        android:background="#77D8D8"
         android:padding="16dp"
         android:paddingLeft="16dp"
         android:paddingTop="30dp"
         android:text="dsfgg"
-        android:textStyle="bold"
+        android:textSize="20sp"
+        app:fontFamily="@font/acme"
+
         />
+
     <TextView
         android:id="@+id/tv_saldo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_height="59dp"
         android:layout_marginLeft="16dp"
+        android:layout_marginTop="100dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="8dp"
-
-
-        android:background="#FBD86D"
+        android:background="#77D8D8"
         android:padding="16dp"
         android:paddingLeft="16dp"
         android:paddingTop="30dp"
         android:text="dsfgg"
-        android:textStyle="bold"
+        android:textSize="20sp"
+        app:fontFamily="@font/acme"
+
         />
 
     <ImageView
         android:id="@+id/iv_eliminar"
         android:layout_width="45dp"
-        android:layout_height="143dp"
+        android:layout_height="151dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:background="#FF9800"
+        android:background="#1EBEA5"
         android:padding="8dp"
         android:src="@drawable/basurero" />
 
@@ -73,8 +73,8 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_alignTop="@+id/tv_nombre"
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginRight="10dp"
         android:layout_toStartOf="@+id/iv_eliminar"
         android:layout_toLeftOf="@+id/iv_eliminar" />
 

@@ -9,45 +9,46 @@
     <TextView
         android:id="@+id/tv_recordatorio"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_height="50dp"
         android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginRight="16dp"
-
-
-        android:background="#FBD86D"
-        android:padding="16dp"
+        android:background="#A7DB6A"
+        android:paddingTop="10dp"
         android:text="sfsdf"
-        android:textStyle="bold" />
+        android:paddingLeft="16dp"
+
+        android:textSize="20sp"
+        app:fontFamily="@font/acme" />
 
     <TextView
         android:id="@+id/tv_fecha"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_height="59dp"
         android:layout_marginLeft="16dp"
+        android:layout_marginTop="50dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="8dp"
-
-
-        android:background="#FBD86D"
+        android:background="#A7DB6A"
         android:padding="16dp"
         android:paddingLeft="16dp"
-        android:paddingTop="30dp"
+        android:paddingTop="1dp"
         android:text="dsfgg"
-        android:textStyle="bold"
+        android:textSize="20sp"
+        app:fontFamily="@font/acme"
+
         />
 
     <ImageView
         android:id="@+id/eliminar"
         android:layout_width="48dp"
-        android:layout_height="92dp"
+        android:layout_height="101dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:background="#FBD86D"
+        android:background="#29CF35"
         android:padding="8dp"
         android:src="@drawable/basurero" />
 

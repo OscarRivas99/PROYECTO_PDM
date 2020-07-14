@@ -20,6 +20,7 @@
             android:ems="10"
             android:gravity="center"
             android:hint="Ingresar recordatorio"
+            android:textColor="#000000"
             android:inputType="textPersonName"
             android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"

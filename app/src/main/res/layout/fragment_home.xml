@@ -24,7 +24,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="23dp"
-        android:src="@drawable/plus"
+        android:src="@drawable/plus_amarillo"
         app:backgroundTint="#92ED5829" />
 
 
