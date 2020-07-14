@@ -1,7 +1,9 @@
 package com.guanacos_sv.bill_wallet_app.ui.avisos
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.DialogInterface
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,10 +13,15 @@ import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.work.Data
+import com.guanacos_sv.bill_wallet_app.Classes.Avisos
 import com.guanacos_sv.bill_wallet_app.Classes.Worknoti
 import com.guanacos_sv.bill_wallet_app.R
+import com.guanacos_sv.bill_wallet_app.database.DBHandler
 import com.guanacos_sv.bill_wallet_app.databinding.FragmentAvisosBinding
+import kotlinx.android.synthetic.main.dialog_dashboard_avisos.*
 import kotlinx.android.synthetic.main.fragment_avisos.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -24,22 +31,11 @@ import java.util.*
 /**
  * A simple [Fragment] subclass.
  */
-class AvisosFragments : Fragment(), AdapterView.OnItemSelectedListener {
-    var categorias = arrayOf(
-        "Factura",
-        "Prestamos",
-        "Deposito",
-        "Banco",
-        "Estudio",
-        "Tarjeta credito",
-        "Tarjeta de cretido",
-        "Alquiler de casa",
-        "Alquiler de apartamento",
-        "Abono a cuenta"
-    )
+class AvisosFragments : Fragment(){
 
-    var spinner: Spinner? = null
-    var textView_msg: TextView? = null
+    lateinit var dbHandler: DBHandler
+
+
     private var calendar: Calendar = Calendar.getInstance()
     private var actual:  Calendar = Calendar.getInstance()
     private var minutos = 0
@@ -59,48 +55,96 @@ class AvisosFragments : Fragment(), AdapterView.OnItemSelectedListener {
 
         // Inflate the layout for this fragment
         val binding = DataBindingUtil.inflate<FragmentAvisosBinding>(inflater, R.layout.fragment_avisos, container, false)
-        val btn_add = binding.btnAdd
-        // val recordatorio = binding.txtRecordatorio
-        val btn_selectfecha = binding.btnFecha
-        val btn_selecthora = binding.btnHora
-        val category = binding.msg
+
+        dbHandler = DBHandler(requireActivity())
+
+
+        val rv_dashboard_avisos = binding.rvDashboardAvisos
+        val btn_agregar = binding.btnAgregar
+
+        rv_dashboard_avisos.layoutManager = LinearLayoutManager(requireActivity())
+
+        btn_agregar.setOnClickListener {
+
+
+            val dialog = AlertDialog.Builder(requireActivity())
+            dialog.setTitle("Añadir nuevo aviso")
+            val view = layoutInflater.inflate(R.layout.dialog_dashboard_avisos, null)
+
+            val txt_recordatorio = view.findViewById<EditText>(R.id.txt_recordatorio)
+            val btn_selectfecha = view.findViewById<TextView>(R.id.btn_fecha)
+
+            dialog.setView(view)
+
+            btn_selectfecha.setOnClickListener {
+
+                anio = actual[Calendar.YEAR]
+                mes = actual[Calendar.MONTH]
+                dia = actual[Calendar.DAY_OF_MONTH]
+
+                val datePickerDialog = DatePickerDialog(
+                    requireActivity(),
+                    DatePickerDialog.OnDateSetListener { view, y, m, d ->
+                        calendar[Calendar.DAY_OF_MONTH] = d
+                        calendar[Calendar.MONTH] = m
+                        calendar[Calendar.YEAR] = y
+
+                        val format = SimpleDateFormat("dd/MM/yyyy")
+                        val strDate = format.format(calendar.time)
+                        btn_selectfecha.setText(strDate)
+
+                    },
+                    anio,
+                    mes,
+                    dia
+                )
+                datePickerDialog.show()
+
+            }
 
 
 
-        btn_selectfecha.setOnClickListener {
-            ShowDatePicker()
+            //Boton añadir del dialogo
+            dialog.setPositiveButton("Add") { _: DialogInterface, _: Int ->
+                if (txt_recordatorio.text.isNotEmpty()){
+
+                    val tag = generateKey()
+                    //Convierte la hora en milisegundos y lo resta con la hora actual del telefono en milisegundos
+
+                    val airtime: Long = calendar.timeInMillis - System.currentTimeMillis()
+
+                    val random = (Math.random() * 50 + 1).toInt()
+                    val aviso = txt_recordatorio.text.toString()
+
+                    Toast.makeText(context, airtime.toString(), Toast.LENGTH_LONG).show()
+                    val data = enviarData("Notificación Bill Wallet App", aviso, random)
+                    Worknoti.Guardarnoti(airtime, data, tag)
+                    //}
+
+                    val avisos = Avisos()
+                    avisos.recordatorio = txt_recordatorio.text.toString()
+                    avisos.fecha = btn_selectfecha.text.toString()
 
 
-        }
+                    dbHandler.addAvisos(avisos)
+                    refreshList()
+                }
+            }
 
-        btn_selecthora.setOnClickListener {
-            ShowTimePicker()
-            show_categori()
+            dialog.setNegativeButton("Cancel") { _: DialogInterface, _: Int ->
 
-        }
+            }
+            dialog.show()
 
 
-        btn_add.setOnClickListener {
-
-            //Toast.makeText(context, "Agregar aviso:    "+ "\nCategoria:  "+  category.text.toString()  ,  Toast.LENGTH_SHORT).show()
-            // Toast.makeText(context, "Hora telefono:    "+ System.currentTimeMillis()+ "Hora app: "+ calendar.timeInMillis , Toast.LENGTH_LONG).show()
-
-            val tag = generateKey()
-            //Convierte la hora en milisegundos y lo resta con la hora actual del telefono en milisegundos
-            val airtime: Long  =  ( (  System.currentTimeMillis() - (calendar.timeInMillis) ))
-            // val diff: Long = date1.getTime() - date2.getTime()
-            //alertTime.toLong()
-            // if( System.currentTimeMillis() == calendar.timeInMillis ) {
-            val random = (Math.random() * 50 + 1).toInt()
-            val aviso = txt_recordatorio.text.toString()
-
-            Toast.makeText(context, airtime.toString() , Toast.LENGTH_LONG).show()
-            val data = enviarData("Notificación Bill Money App", aviso, random)
-            Worknoti.Guardarnoti(airtime,data,tag)
-            //}
         }
 
         return binding.root
+    }
+
+    override fun onResume() {
+        refreshList()
+        super.onResume()
     }
 
     private fun generateKey() : String {
@@ -114,62 +158,66 @@ class AvisosFragments : Fragment(), AdapterView.OnItemSelectedListener {
             .putInt("id_noti",id_noti).build()
     }
 
-
-    override fun onNothingSelected(parent: AdapterView<*>?) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onItemSelected(arg0: AdapterView<*>, arg1: View, position: Int, id: Long) {
-        textView_msg!!.text = " "+categorias[position]
+    private fun refreshList() {
+        rv_dashboard_avisos.adapter = DashboardAdapter(this, dbHandler.getAvisos())
     }
 
 
-    //Fecha, Hora y Categoria
-    @RequiresApi(Build.VERSION_CODES.N)
-    private fun ShowDatePicker(){
+    class DashboardAdapter(val fragment: AvisosFragments, val list: MutableList<Avisos>) :
+        RecyclerView.Adapter<DashboardAdapter.ViewHolder>() {
+        override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
+            return ViewHolder(
+                LayoutInflater.from(fragment!!.context).inflate(
+                    R.layout.avisos_dashboard,
+                    p0,
+                    false
+                )
+            )
 
-        anio = actual[Calendar.YEAR]
-        mes = actual[Calendar.MONTH]
-        dia = actual[Calendar.DAY_OF_MONTH]
+        }
 
-        val datePickerDialog = DatePickerDialog(requireActivity(), DatePickerDialog.OnDateSetListener { view, y, m, d ->
-            calendar[Calendar.DAY_OF_MONTH] = d
-            calendar[Calendar.MONTH] = m
-            calendar[Calendar.YEAR] = y
+        override fun getItemCount(): Int {
+            return list.size
+        }
 
-            val format = SimpleDateFormat("dd/MM/yyyy")
-            val strDate = format.format(calendar.time)
-            btn_fecha.setText(strDate)
+        override fun onBindViewHolder(holder: ViewHolder, p1: Int) {
 
-        },anio,mes,dia)
-        datePickerDialog.show()
+           holder.recordatorio.text = list[p1].recordatorio
+            holder.fecha.text = list[p1].fecha
+
+            holder.recordatorio.text = "Recordatorio: " + holder.recordatorio.text
+            holder.fecha.text = "Fecha: " + holder.fecha.text
+
+
+
+            holder.eliminar.setOnClickListener {
+                val dialog = AlertDialog.Builder(fragment.requireContext())
+                dialog.setTitle("Aviso")
+                dialog.setMessage("¿Desea eliminar este recordatorio?")
+                dialog.setPositiveButton("Continue") { _: DialogInterface, _: Int ->
+                    fragment.dbHandler.deleteAvisos(list[p1].id)
+                    fragment.refreshList()
+                }
+                dialog.setNegativeButton("Cancel") { _: DialogInterface, _: Int ->
+
+                }
+                dialog.show()
+            }
+        }
+        class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
+            val recordatorio: TextView = v.findViewById(R.id.tv_recordatorio)
+            val fecha: TextView = v.findViewById(R.id.tv_fecha)
+            val eliminar: ImageView = v.findViewById(R.id.eliminar)
+
+
+        }
+
+
     }
 
-    private fun ShowTimePicker(){
 
-        hora = actual[Calendar.HOUR_OF_DAY]
-        minutos = actual[Calendar.MINUTE]
-
-        var timePicker = TimePickerDialog(requireActivity(), TimePickerDialog.OnTimeSetListener { view, h, m ->
-
-            btn_hora.setText("  Hora: " + String.format("%02d:%02d", h, m))
-
-        },hora,minutos, true)
-        timePicker.show()
-    }
-
-    private fun show_categori(){
-        textView_msg = this.msg
-        spinner = this.spinner_sample
-        spinner!!.setOnItemSelectedListener(this)
-        // Create an ArrayAdapter using a simple spinner layout and languages array
-
-        val aa = ArrayAdapter<String>(requireActivity(),android.R.layout.simple_spinner_item, categorias)
-        // Set layout to use when the list of choices appear
-        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        // Set Adapter to Spinner
-        spinner!!.setAdapter(aa)
-
-    }
 
 }
+
+
+
