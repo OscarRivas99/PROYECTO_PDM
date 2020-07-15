@@ -1,7 +1,7 @@
 package com.guanacos_sv.bill_wallet_app.database
 
 
-const val DB_NAME = "BillMoney1.30"
+const val DB_NAME = "BillMoney1.35"
 const val COL_CUENTA_NAME = "nombre_cuenta"
 const val DB_VERSION = 1
 const val TABLE_MONEYAPP = "MoneyApp"

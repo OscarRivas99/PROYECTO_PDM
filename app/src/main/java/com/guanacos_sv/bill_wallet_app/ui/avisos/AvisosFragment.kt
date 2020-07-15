@@ -55,7 +55,7 @@ class AvisosFragments : Fragment(){
 
         // Inflate the layout for this fragment
         val binding = DataBindingUtil.inflate<FragmentAvisosBinding>(inflater, R.layout.fragment_avisos, container, false)
-
+        Toast.makeText(context!!, "Cree una alerta en el boton +", Toast.LENGTH_LONG).show()
         dbHandler = DBHandler(requireActivity())
 
 

@@ -42,7 +42,7 @@ class HomeFragment : Fragment() {
             false
         )
         dbHandler = DBHandler(requireActivity())
-
+        Toast.makeText(context!!, "Cree un movimiento en el boton +", Toast.LENGTH_LONG).show()
         val rv_dashboard = binding.rvDashboard
         val btn = binding.fabDashboard
         rv_dashboard.layoutManager = LinearLayoutManager(requireActivity())
@@ -194,7 +194,7 @@ class HomeFragment : Fragment() {
                         val tipo_movimiento1 = view.findViewById<Switch>(R.id.tipo_movimiento)
                         val switchState: Boolean = tipo_movimiento1.isChecked()
                         if (switchState) {
-                            if(dbHandler.GetSaldo(movement.nombre_cuenta).toInt() < movement.monto.toInt()) {
+                            if(dbHandler.GetSaldo(movement.nombre_cuenta).toDouble() < movement.monto.toDouble() ) {
                                 Toast.makeText(
                                     context!!,
                                     "Ha alcanzado su limite de saldo disponible",
@@ -257,16 +257,6 @@ class HomeFragment : Fragment() {
         refreshList()
         super.onResume()
     }
-
-
-
-
-
-
-
-
-
-
 
     fun updateMovement(movement: Movement) {
         val dialog = AlertDialog.Builder(requireActivity())
@@ -395,7 +385,7 @@ class HomeFragment : Fragment() {
                 val tipo_movimiento1 = view.findViewById<Switch>(R.id.tipo_movimiento)
                 val switchState: Boolean = tipo_movimiento1.isChecked()
                 if (switchState) {
-                    if(dbHandler.GetSaldo(movement.nombre_cuenta).toInt() < movement.monto.toInt()) {
+                    if(dbHandler.GetSaldo(movement.nombre_cuenta).toDouble() < movement.monto.toDouble()) {
                         Toast.makeText(
                             context!!,
                             "Ha alcanzado su limite de saldo disponible",
