@@ -36,7 +36,7 @@ class AccountsFragment : Fragment() {
             inflater, R.layout.fragment_accounts, container,
             false
         )
-
+        Toast.makeText(context, "Cree una cuenta en el boton +" , Toast.LENGTH_LONG).show()
         dbHandler = DBHandler(requireActivity())
 
         val rv_dashboard_cuenta = binding.rvDashboardCuenta
@@ -105,7 +105,7 @@ class AccountsFragment : Fragment() {
                     accounts.cuenta = valor_cuenta
                     accounts.saldo = saldo.text.toString()
 
-                    if(accounts.saldo.toInt() < 0 ){
+                    if(accounts.saldo.toDouble() < 0 ){
                         Toast.makeText(context, "No se permiten saldos negativos" , Toast.LENGTH_LONG).show()
                     }else {
 
