@@ -16,7 +16,7 @@
         android:background="#77D8D8"
         android:padding="16dp"
         android:text="sfsdf"
-        android:textSize="20sp"
+        android:textSize="16sp"
         app:fontFamily="@font/acme" />
 
     <TextView
@@ -32,7 +32,7 @@
         android:paddingLeft="16dp"
         android:paddingTop="30dp"
         android:text="dsfgg"
-        android:textSize="20sp"
+        android:textSize="16sp"
         app:fontFamily="@font/acme"
 
         />
@@ -50,7 +50,7 @@
         android:paddingLeft="16dp"
         android:paddingTop="30dp"
         android:text="dsfgg"
-        android:textSize="20sp"
+        android:textSize="16sp"
         app:fontFamily="@font/acme"
 
         />

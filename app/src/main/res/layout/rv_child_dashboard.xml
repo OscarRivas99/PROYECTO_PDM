@@ -19,7 +19,7 @@
         android:paddingLeft="16dp"
         android:paddingTop="10dp"
         android:text="sfsdf"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:fontFamily="@font/acme"/>
 
     <TextView
@@ -35,7 +35,7 @@
         android:paddingLeft="16dp"
         android:paddingTop="10dp"
         android:text="dsfgg"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:fontFamily="@font/acme"
          />
 
@@ -52,7 +52,7 @@
         android:fontFamily="@font/acme"
         android:paddingLeft="16dp"
         android:paddingTop="10dp"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:text="dsfgg"
          />
 
@@ -72,7 +72,7 @@
         android:paddingLeft="16dp"
         android:paddingTop="0dp"
         android:text="dsfgg"
-        android:textSize="20sp" />
+        android:textSize="16sp" />
 
 
     <TextView
